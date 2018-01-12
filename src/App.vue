@@ -36,6 +36,12 @@
               'background-image' : 'url(' + selectCircle + ')'
             }">
           </div>
+          <div class="circleWrapper right hidden-mobile">
+            <div class="circle"></div>
+          </div>
+          <div class="circleWrapper left hidden-mobile">
+            <div class="circle"></div>
+          </div>
         </div>
         <div class="content">
           <button class="left" v-if="currentSlide!=0" @click="clickPre">上一頁</button>
@@ -301,6 +307,10 @@ button.left{
   padding-right: 10%;
 }
 
+.circleWrapper{
+  position: absolute;
+}
+
 .circle{
   position: absolute;
   background-position: center center;
@@ -340,6 +350,12 @@ button.left{
 }
 
 @media screen and (max-width: 1023px){
+  .hidden-mobile{
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1024px){
   .hidden-pc{
     display: none;
   }
