@@ -1,7 +1,8 @@
 <template>
     <div id="share-block" class="share-block">
         <div class="fbshare" @click="fbShare">
-            <img :src="fbbtn" alt="" style="width: 100px;">
+            <!-- <img :src="fbbtn" alt="" style="width: 100px;"> -->
+            <p>分享</p>
         </div>
         <div class="line-block" @click="lineShare">
             <img class="line-share" src="//media.line.me/img/button/zh-hant/84x20.png" width="92" height="22" alt="LINE分享給朋友">
@@ -48,6 +49,7 @@ export default {
 
 <style scoped>
 #share-block {
+  display: flex;
   height: 28px;
 }
 
@@ -59,6 +61,21 @@ export default {
   /* float: left; */
   cursor: pointer;
   margin-left: 5px;
-  margin-top: 1px;
+  /* margin-top: 1px; */
+}
+
+.fbshare {
+  cursor: pointer;
+  background: #3b5998;
+  width: 50px;
+  height: 22px;
+  color: white;
+  border-radius: 5px;
+}
+
+.fbshare p {
+  padding: 1px;
+  margin: 0;
+  font-size: 14px;
 }
 </style>
