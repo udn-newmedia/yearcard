@@ -18,16 +18,20 @@
         <div class="content">
           <button class="left" v-if="currentSlide!=0" @click="clickPre">上一頁</button>
           <button class="right" v-if="currentSlide!=list.length-1" @click="clickNext">下一頁</button>
-            <div class="dogs" v-if="currentSlide!==0">
+            <div class="dogs" v-if="currentSlide!=0">
               <div 
                 class="adog"
                 v-for="(eachDog, index) in list" 
                 :key="eachDog.name" 
-                :style="{'opacity' : showDog(index)}" 
+                :style="{
+                  'opacity' : showDog(index),
+                  'z-index' : getZindex(index)
+                }" 
                 v-show="index!=0">
                   <h2>第{{index}}隻狗狗</h2>
                   <img class="dog" :src="eachDog.pic">
-                  <Share :href="eachDog.href"/>
+                  <Share 
+                    :href="eachDog.href"/>
               </div>
               <!-- <ul class="slider-nav">
                 <li v-for="n in list.length-3" :key="n.id">
@@ -35,6 +39,7 @@
                 </li>
               </ul> -->
             </div>          
+            <!-- <Share :href="list[currentSlide].href"/> -->
         </div>
       </div>
     </div>
@@ -115,6 +120,13 @@ export default {
         return '1'
       } else {
         return '0'
+      }
+    },
+    getZindex: function (index) {
+      if (index === Number(this.currentSlide)) {
+        return '2'
+      } else {
+        return '1'
       }
     }
   }

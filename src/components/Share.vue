@@ -48,17 +48,17 @@ export default {
 
 <style scoped>
 #share-block {
-    height: 28px;
+  height: 28px;
 }
 
 .fb-like-block {
-    float: left;
+  float: left;
 }
 
 .line-block {
-    /* float: left; */
-    cursor: pointer;
-    margin-left: 5px;
-    margin-top: 1px;
+  /* float: left; */
+  cursor: pointer;
+  margin-left: 5px;
+  margin-top: 1px;
 }
 </style>
