@@ -15,7 +15,7 @@
             }">
           </div>
         </div>
-        <div class="bg">
+        <div class="bg" v-show="currentSlide!=0">
           <div class="circle circleLeftTop hidden-pc"
             :style="{
               'background-image' : 'url(' + selectCircle + ')'
@@ -36,11 +36,23 @@
               'background-image' : 'url(' + selectCircle + ')'
             }">
           </div>
-          <div class="circleWrapper right hidden-mobile">
-            <div class="circle"></div>
+          <div class="circleWrapper right hidden-mobile"
+            :style="{
+              'background-image' : 'url(' + selectCircle + ')'
+            }">
+            <div class="circle"
+              :style="{
+                'background-image' : 'url(' + selectCircle + ')'
+              }"></div>
           </div>
-          <div class="circleWrapper left hidden-mobile">
-            <div class="circle"></div>
+          <div class="circleWrapper left hidden-mobile"
+            :style="{
+              'background-image' : 'url(' + selectCircle + ')'
+            }">
+            <div class="circle"
+              :style="{
+                'background-image' : 'url(' + selectCircle + ')'
+              }"></div>
           </div>
         </div>
         <div class="content">
@@ -56,21 +68,57 @@
                   'z-index' : getZindex(index)
                 }" 
                 v-show="index!=0">
-                  <h2 class="title wrapper">第{{index}}隻狗狗</h2>
+                  <div class="words">
+                    <div
+                      class="title wordbyword"
+                      v-for="(word, index) in eachDog.title"
+                      :key="index"
+                      :style="{
+                        'background-color' : eachDog.fontBackground,
+                        'color' : eachDog.fontColor
+                      }">
+                      {{word}}
+                    </div>
+                    <h1 class="title">帶我們回家<br>陪你過年，好嗎？</h1>
+                    <div class="text hidden-mobile">
+                      <p>毛色 : 黑色 短</p>
+                      <p>體型 : 中型、品種 : 混種</p>
+                      <Share
+                        style="text-align: center;
+                              margin-top: 30px;" 
+                        :href="eachDog.href"/>
+                    </div>
+                  </div>
                   <img class="dog" :src="eachDog.pic">
-                  <div class="text wrapper">
+                  <div class="text hidden-pc">
                     <p>毛色 : 黑色 短</p>
                     <p>體型 : 中型、品種 : 混種</p>
                   </div>
-                  <Share class="wrapper" :href="eachDog.href"/>
+                  <Share class="hidden-pc" :href="eachDog.href"/>
+                  <!-- <ul class="slider-nav">
+                    <li v-for="n in list.length-1" :key="n.id">
+                      <span class="bullet" :class="{'active': n === currentSlide}"></span>
+                    </li>
+                  </ul> -->
+                  <div class="phone">
+                    <img :src="eachDog.phone" alt="">
+                    <button 
+                      class="interaction"
+                      :style="{
+                        'background-color': eachDog.btnColor,
+                        'color': eachDog.btntxtColor
+                      }"
+                    ><img class="arrow" :src="eachDog.arrow">與我互動</button>
+                    <BodyMovin :jsonfile="eachDog.anim"></BodyMovin>
+                  </div>
               </div>
-              <!-- <ul class="slider-nav">
-                <li v-for="n in list.length-3" :key="n.id">
-                  <span class="circle" :class="{'active': n === current}"></span>
-                </li>
-              </ul> -->
             </div>          
         </div>
+        <ul class="slider-nav">
+          <li v-for="(n, index) in bullets.length" :key="n.id">
+            <img :src="bullets[index]" alt="">
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -78,6 +126,7 @@
 
 <script>
 import Share from './components/Share'
+import BodyMovin from './components/BodyMovin'
 import dog1 from '@/assets/dog-1.png'
 import dog2 from '@/assets/dog-2.png'
 import dog3 from '@/assets/dog-3.png'
@@ -85,6 +134,13 @@ import bg1 from '@/assets/bg1.jpg'
 import bg2 from '@/assets/bg2.jpg'
 import circle1 from '@/assets/circle-1.png'
 import circle2 from '@/assets/circle-2.png'
+import phone1 from '@/assets/phone4.png'
+import phone2 from '@/assets/phone3.png'
+import arrow1 from '@/assets/up2.png'
+import arrow2 from '@/assets/up.png'
+import bullet1 from '@/assets/a-1.png'
+import bullet2 from '@/assets/a-2.png'
+import bullet3 from '@/assets/a-3.png'
 
 export default {
   name: 'app',
@@ -96,6 +152,13 @@ export default {
       bg2: bg2,
       circle1: circle1,
       circle2: circle2,
+      phone1: phone1,
+      phone2: phone2,
+      arrow1: arrow1,
+      arrow2: arrow2,
+      bullet1: bullet1,
+      bullet2: bullet2,
+      bullet3: bullet3,
       list: [
         {
           name: 'slide0',
@@ -106,20 +169,47 @@ export default {
           pic: dog1,
           href: 'https://nmdap.udn.com.tw/yearcard/one.html',
           background: bg1,
-          circle: circle2
+          circle: circle2,
+          phone: phone1,
+          btnColor: '#eb0029',
+          btntxtColor: '#ffc700',
+          fontColor: '#f5d949',
+          fontBackground: '#eb0029',
+          anim: './static/D1.json',
+          arrow: arrow1,
+          title: '第一隻狗狗'
         }, {
           name: 'slide2',
           pic: dog2,
           href: 'https://nmdap.udn.com.tw/yearcard/two.html',
           background: bg2,
-          circle: circle1
+          circle: circle1,
+          phone: phone2,
+          btnColor: '#ffc700',
+          btntxtColor: '#eb0029',
+          fontColor: '#eb0029',
+          fontBackground: '#f5d949',
+          anim: './static/D3.json',
+          arrow: arrow2,
+          title: '第二隻狗狗'
         }, {
           name: 'slide3',
           pic: dog3,
           href: 'https://nmdap.udn.com.tw/yearcard/three.html',
           background: bg1,
-          circle: circle2
+          circle: circle2,
+          phone: phone1,
+          btnColor: '#eb0029',
+          btntxtColor: '#ffc700',
+          fontColor: '#f5d949',
+          fontBackground: '#eb0029',
+          anim: './static/D4.json',
+          arrow: arrow1,
+          title: '第三隻狗狗'
         }
+      ],
+      bullets: [
+        bullet1, bullet2, bullet3
       ]
     }
   },
@@ -135,7 +225,7 @@ export default {
     }
   },
   components: {
-    Share
+    Share, BodyMovin
   },
   created: function () {
     if (this.getParameterByName('dog')) {
@@ -204,6 +294,7 @@ body {
   overflow-x: hidden;
   overflow-y: hidden;
 }
+
 .slides {
   position: absolute;
   display: flex;
@@ -227,6 +318,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 .dogs {
   position: relative;
@@ -257,6 +349,7 @@ body {
 
 @media screen and (min-width: 1024px){
   .adog {
+    width: 1084px;
     transform: translateX(-50%) translateY(-50%);
   }  
 }
@@ -278,6 +371,8 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
+  background: gray;
+  overflow-x: hidden;
 }
 
 button.right{
@@ -302,13 +397,76 @@ button.left{
   margin: 0;
 }
 
-.wrapper{
-  padding-left: 10%;
-  padding-right: 10%;
+.words{
+  text-align: left;
+}
+
+.title.wordbyword {
+  display: inline-block;
+  text-align: center;
+  line-height:30px;
+  width: 30px;
+  height: 30px;
+  background: red;
+  border-radius: 50%;
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+@media screen and (min-width: 1024px){
+  .words{
+    position: absolute;
+    top: 20%;
+    transform: translateY(-50%);
+  }
+
+  .text {
+    position: absolute;
+    left: 0;
+  }
+
+  .title.wordbyword {
+    line-height:50px;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+  }
 }
 
 .circleWrapper{
   position: absolute;
+  background-position: center center;
+  background-size: cover;
+  width: 350px;
+  height: 350px;
+}
+
+.circleWrapper.right{
+  right: 5%;
+  top: 0;
+}
+
+.circleWrapper.left{
+  left: 0;
+  bottom: 0;
+  transform: translateX(-25%) translateY(25%)
+}
+
+.circleWrapper.right .circle{
+  position: absolute;
+  bottom: -50px;
+  right: -50px;
+  width: 100px;
+  height: 100px;
+}
+
+.circleWrapper.left .circle{
+  position: absolute;
+  top: -75px;
+  right: -125px;
+  width: 150px;
+  height: 150px;
 }
 
 .circle{
@@ -349,15 +507,107 @@ button.left{
   transform: translateX(45%) translateY(45%);
 }
 
+.phone{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  right: 0;
+  bottom: 0;
+  transform: translateX(25%);
+}
+
+.phone img{
+  width: 54px;
+  margin-bottom: 8px;
+}
+
+@media screen and (min-width: 1024px){
+  .phone{
+    transform: translateX(0);
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .phone img{
+    width: 118px;
+    margin-bottom: 29px;
+  }
+}
+
+button.interaction {
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.87;
+  color: white;
+  border: none;
+  width: 90px;
+  height: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 4px 2px rgba(53, 53, 53, 0.14);
+}
+
+@media screen and (min-width: 1024px){
+  button.interaction {
+    width: 155px;
+    height: 60px;
+    border-radius: 30px;
+    font-size: 21px;
+  }
+}
+
+img.arrow{
+  width: 15px;
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 1024px){
+  img.arrow{
+    width: 21px;
+  }  
+}
+
+ul.slider-nav{
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 20px 0 0 0;
+  padding: 0;
+}
+
+ul.slider-nav li{
+    float: left;
+    margin: 0 3px;
+}
+
+ul.slider-nav li .bullet{
+    display: block;
+    width: 10px;
+    height: 10px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    background: transparent;
+}
+
+ul.slider-nav li .bullet.active{
+    background: #bfbfbf;
+    border-color: #bfbfbf;
+}
+
+.clearfix{
+  clear: both;
+}
+
 @media screen and (max-width: 1023px){
   .hidden-mobile{
-    display: none;
+    display: none!important;
   }
 }
 
 @media screen and (min-width: 1024px){
   .hidden-pc{
-    display: none;
+    display: none!important;
   }
 }
+
 </style>
