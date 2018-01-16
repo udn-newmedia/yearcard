@@ -1,124 +1,88 @@
 <template>
   <div id="app">
     <!-- <router-view/> -->
-    <div class="fullpage">
-      <div class="section">
-        <div class="slides" ref="slides" 
+    <div class="section">
+      <Slides :list="list" :currentSlide="currentSlide" />
+      <Foreground :currentSlide="currentSlide" />
+      <div class="content">
+        <button class="left" v-if="currentSlide!=0" @click="clickPre">
+          <i class="fa fa-angle-left fa-3" aria-hidden="true" style="font-size: 30px; transform: translateX(75%); color: white;"></i>
+        </button>
+        <button class="right" v-if="currentSlide!=list.length-1" @click="clickNext">
+          <i class="fa fa-angle-right fa-3" aria-hidden="true" style="font-size: 30px; transform: translateX(-75%); color: white;"></i>
+        </button>
+        <div class="dogs" v-if="currentSlide!=0">
+          <div 
+            class="adog"
+            v-for="(eachDog, index) in list" 
+            :key="eachDog.name" 
             :style="{
-              'transition' : 'none',
-              'width' : (list.length * 100) + '%',
-              'transform' : 'translateX(-' + currentSlide / list.length * 100 + '%)'
-            }">
-          <div v-for="slide in list" :key="slide.name" class="slide"
-            :style="{
-              'background-image' : 'url(' + slide.background + ')'
-            }">
-          </div>
-        </div>
-        <div class="bg" v-show="currentSlide!=0">
-          <div class="circle circleLeftTop hidden-pc"
-            :style="{
-              'background-image' : 'url(' + selectCircle + ')'
-            }">
-          </div>
-          <div class="circle circleLeftBottom hidden-pc"
-            :style="{
-              'background-image' : 'url(' + selectCircle + ')'
-            }">
-          </div>
-          <div class="circle circleRightTop hidden-pc"
-            :style="{
-              'background-image' : 'url(' + selectCircle + ')'
-            }">
-          </div>
-          <div class="circle circleRightBottom hidden-pc"
-            :style="{
-              'background-image' : 'url(' + selectCircle + ')'
-            }">
-          </div>
-          <div class="circleWrapper right hidden-mobile"
-            :style="{
-              'background-image' : 'url(' + selectCircle + ')'
-            }">
-            <div class="circle"
-              :style="{
-                'background-image' : 'url(' + selectCircle + ')'
-              }"></div>
-          </div>
-          <div class="circleWrapper left hidden-mobile"
-            :style="{
-              'background-image' : 'url(' + selectCircle + ')'
-            }">
-            <div class="circle"
-              :style="{
-                'background-image' : 'url(' + selectCircle + ')'
-              }"></div>
-          </div>
-        </div>
-        <div class="content">
-          <button class="left" v-if="currentSlide!=0" @click="clickPre">上一頁</button>
-          <button class="right" v-if="currentSlide!=list.length-1" @click="clickNext">下一頁</button>
-            <div class="dogs" v-if="currentSlide!=0">
-              <div 
-                class="adog"
-                v-for="(eachDog, index) in list" 
-                :key="eachDog.name" 
+              'opacity' : showDog(index),
+              'z-index' : getZindex(index)
+            }" 
+            v-show="index!=0">
+              <div class="words">
+                <div
+                  class="title wordbyword"
+                  v-for="(word, index) in eachDog.title"
+                  :key="index"
+                  :style="{
+                    'background-color' : eachDog.fontBackground,
+                    'color' : eachDog.fontColor
+                  }">
+                  {{word}}
+                </div>
+                <h1 
+                  class="title" 
+                  :style="{
+                    'color' : fontColor
+                  }">帶我們回家<br>陪你過年，好嗎？</h1>
+                <div class="text hidden-mobile" 
+                  :style="{
+                    'color' : fontColor
+                  }">
+                  <p>毛色 : 黑色 短</p>
+                  <p>體型 : 中型、品種 : 混種</p>
+                  <Share
+                    style="text-align: center;
+                          margin-top: 30px;" 
+                    :href="eachDog.href"/>
+                </div>
+              </div>
+              <img class="dog" :src="eachDog.pic">
+              <ul class="slider-nav hidden-mobile" v-if="currentSlide!=0">
+                <li v-for="n in bullets.length" :key="n.id">
+                  <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
+                </li>
+              </ul>
+              <div class="text hidden-pc"
                 :style="{
-                  'opacity' : showDog(index),
-                  'z-index' : getZindex(index)
-                }" 
-                v-show="index!=0">
-                  <div class="words">
-                    <div
-                      class="title wordbyword"
-                      v-for="(word, index) in eachDog.title"
-                      :key="index"
-                      :style="{
-                        'background-color' : eachDog.fontBackground,
-                        'color' : eachDog.fontColor
-                      }">
-                      {{word}}
-                    </div>
-                    <h1 class="title">帶我們回家<br>陪你過年，好嗎？</h1>
-                    <div class="text hidden-mobile">
-                      <p>毛色 : 黑色 短</p>
-                      <p>體型 : 中型、品種 : 混種</p>
-                      <Share
-                        style="text-align: center;
-                              margin-top: 30px;" 
-                        :href="eachDog.href"/>
-                    </div>
-                  </div>
-                  <img class="dog" :src="eachDog.pic">
-                  <ul class="slider-nav hidden-mobile" v-if="currentSlide!=0">
-                    <li v-for="n in bullets.length" :key="n.id">
-                      <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
-                    </li>
-                  </ul>
-                  <div class="text hidden-pc">
-                    <p>毛色 : 黑色 短</p>
-                    <p>體型 : 中型、品種 : 混種</p>
-                  </div>
-                  <Share class="hidden-pc" :href="eachDog.href"/>
-                  <div class="phone">
-                    <img :src="eachDog.phone" alt="">
-                    <button 
-                      class="interaction"
-                      :style="{
-                        'background-color': eachDog.btnColor,
-                        'color': eachDog.btntxtColor
-                      }"
-                    ><img class="arrow" :src="eachDog.arrow">與我互動</button>
-                    <BodyMovin :jsonfile="eachDog.anim"></BodyMovin>
-                  </div>
+                  'color' : fontColor
+                }">
+                <p>毛色 : 黑色 短</p>
+                <p>體型 : 中型、品種 : 混種</p>
+              </div>
+              <Share class="hidden-pc" :href="eachDog.href"/>
+              <div class="phone">
+                <img :src="eachDog.phone" alt="">
+                <button 
+                  class="interaction"
+                  :style="{
+                    'background-color': eachDog.btnColor,
+                    'color': eachDog.btntxtColor
+                  }">
+                  <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                  與我互動
+                </button>
+                <BodyMovin :jsonfile="eachDog.anim"></BodyMovin>
               </div>
             </div>
-            <ul class="slider-nav hidden-pc" v-if="currentSlide!=0">
-              <li v-for="n in bullets.length" :key="n.id">
-                <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
-              </li>
-            </ul>
           </div>
+          <ul class="slider-nav hidden-pc" v-if="currentSlide!=0">
+            <li v-for="n in bullets.length" :key="n.id">
+              <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
+            </li>
+          </ul>
       </div>
     </div>
   </div>
@@ -127,39 +91,32 @@
 <script>
 import Share from './components/Share'
 import BodyMovin from './components/BodyMovin'
+import Slides from './components/Slides'
+import Foreground from './components/Foreground'
 import dog1 from '@/assets/dog-1.png'
 import dog2 from '@/assets/dog-2.png'
 import dog3 from '@/assets/dog-3.png'
-import bg1 from '@/assets/bg1.jpg'
-import bg2 from '@/assets/bg2.jpg'
-import circle1 from '@/assets/circle-1.png'
-import circle2 from '@/assets/circle-2.png'
 import phone1 from '@/assets/phone4.png'
 import phone2 from '@/assets/phone3.png'
-import arrow1 from '@/assets/up2.png'
-import arrow2 from '@/assets/up.png'
 import bullet1 from '@/assets/a-1.png'
 import bullet2 from '@/assets/a-2.png'
 import bullet3 from '@/assets/a-3.png'
+import bg1 from '@/assets/bg1.jpg'
+import bg2 from '@/assets/bg2.jpg'
 
 export default {
   name: 'app',
   data: function () {
     return {
       currentSlide: 0,
-      transitionDuration: 500,
-      bg1: bg1,
-      bg2: bg2,
-      circle1: circle1,
-      circle2: circle2,
       phone1: phone1,
       phone2: phone2,
-      arrow1: arrow1,
-      arrow2: arrow2,
       bullet1: bullet1,
       bullet2: bullet2,
       bullet3: bullet3,
-      list: [
+      bg1: bg1,
+      bg2: bg2,
+      originalList: [
         {
           name: 'slide0',
           background: 'gray'
@@ -168,43 +125,34 @@ export default {
           name: 'slide1',
           pic: dog1,
           href: 'https://nmdap.udn.com.tw/yearcard/one.html',
-          background: bg1,
-          circle: circle2,
           phone: phone1,
           btnColor: '#eb0029',
           btntxtColor: '#ffc700',
           fontColor: '#f5d949',
           fontBackground: '#eb0029',
           anim: './static/D1.json',
-          arrow: arrow1,
           title: '第一隻狗狗'
         }, {
           name: 'slide2',
           pic: dog2,
           href: 'https://nmdap.udn.com.tw/yearcard/two.html',
-          background: bg2,
-          circle: circle1,
           phone: phone2,
           btnColor: '#ffc700',
           btntxtColor: '#eb0029',
           fontColor: '#eb0029',
           fontBackground: '#f5d949',
           anim: './static/D3.json',
-          arrow: arrow2,
           title: '第二隻狗狗'
         }, {
           name: 'slide3',
           pic: dog3,
           href: 'https://nmdap.udn.com.tw/yearcard/three.html',
-          background: bg1,
-          circle: circle2,
           phone: phone1,
           btnColor: '#eb0029',
           btntxtColor: '#ffc700',
           fontColor: '#f5d949',
           fontBackground: '#eb0029',
           anim: './static/D4.json',
-          arrow: arrow1,
           title: '第三隻狗狗'
         }
       ],
@@ -214,27 +162,31 @@ export default {
     }
   },
   computed: {
-    selectCircle: function () {
-      if (this.currentSlide === 0) {
-        return null
-      } else if (Number(this.currentSlide) % 2 === 0) {
-        return circle1
+    fontColor: function () {
+      if (Number(this.currentSlide) % 2 === 0) {
+        return '#fff'
       } else if (Number(this.currentSlide) % 2 === 1) {
-        return circle2
+        return '#000'
       }
+    },
+    list: function () {
+      for (let i = 1; i < this.originalList.length; i++) {
+        if (i % 2 === 0) {
+          this.originalList[i].background = bg2
+        } else if (i % 2 === 1) {
+          this.originalList[i].background = bg1
+        }
+      }
+      return this.originalList
     }
   },
   components: {
-    Share, BodyMovin
+    Share, BodyMovin, Foreground, Slides
   },
   created: function () {
     if (this.getParameterByName('dog')) {
       this.currentSlide = this.getParameterByName('dog')
     }
-  },
-  mounted: function () {
-    let $slides = this.$refs.slides
-    $slides.style.transition = 'all ' + this.transitionDuration / 1000 + 's'
   },
   methods: {
     getParameterByName: function (name, url) {
@@ -295,20 +247,6 @@ body {
   overflow-y: hidden;
 }
 
-.slides {
-  position: absolute;
-  display: flex;
-  height: 100%;
-  z-index: 0;
-}
-
-.bg{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 1;   
-}
-
 .content {
   position: absolute;
   width: 100%;
@@ -326,7 +264,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: column;  
 }
 
 @media screen and (max-width: 1023px){
@@ -365,27 +303,34 @@ body {
   }
 }  
 
-.slide {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background: gray;
-  overflow-x: hidden;
-}
-
 button.right{
   position: absolute;
+  cursor: pointer;
   top: 50%;
   right: 0;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(to right, #5c3000, #40220f);
+  border: none;
+  border-radius: 50%;
+  transform: translateX(50%) translateY(-50%);
 }
 
 button.left{
   position: absolute;
+  cursor: pointer;
   top: 50%;
   left: 0;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(to right, #40220f, #5c3000);
+  border: none;
+  border-radius: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+button.left:active, button.right:active, button.left:visited, button.right:visited{
+  border-style: none;
 }
 
 .text{
@@ -433,80 +378,6 @@ button.left{
     height: 50px;
     font-size: 30px;
   }
-}
-
-.circleWrapper{
-  position: absolute;
-  background-position: center center;
-  background-size: cover;
-  width: 350px;
-  height: 350px;
-}
-
-.circleWrapper.right{
-  right: 5%;
-  top: 0;
-  transform: translateY(-25%)
-}
-
-.circleWrapper.left{
-  left: 0;
-  bottom: 0;
-  transform: translateX(-25%) translateY(25%)
-}
-
-.circleWrapper.right .circle{
-  position: absolute;
-  bottom: -50px;
-  right: -50px;
-  width: 100px;
-  height: 100px;
-}
-
-.circleWrapper.left .circle{
-  position: absolute;
-  top: -75px;
-  right: -125px;
-  width: 150px;
-  height: 150px;
-}
-
-.circle{
-  position: absolute;
-  background-position: center center;
-  background-size: cover;
-}
-
-.circleLeftTop{
-  top: 50px;
-  left: 0;
-  width: 200px;
-  height: 200px;
-  transform: translateX(-50%);
-}
-
-.circleLeftBottom{
-  bottom: 50px;
-  left: 0;
-  width: 150px;
-  height: 150px;
-  transform: translateX(-50%);
-}
-
-.circleRightTop{
-  top: 150px;
-  right: 0;
-  width: 100px;
-  height: 100px;
-  transform: translateX(20%);
-}
-
-.circleRightBottom{
-  bottom: 0;
-  right: 0;
-  width: 130px;
-  height: 130px;
-  transform: translateX(45%) translateY(45%);
 }
 
 .phone{
