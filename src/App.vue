@@ -90,16 +90,16 @@
                     </div>
                   </div>
                   <img class="dog" :src="eachDog.pic">
+                  <ul class="slider-nav hidden-mobile" v-if="currentSlide!=0">
+                    <li v-for="n in bullets.length" :key="n.id">
+                      <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
+                    </li>
+                  </ul>
                   <div class="text hidden-pc">
                     <p>毛色 : 黑色 短</p>
                     <p>體型 : 中型、品種 : 混種</p>
                   </div>
                   <Share class="hidden-pc" :href="eachDog.href"/>
-                  <!-- <ul class="slider-nav">
-                    <li v-for="n in list.length-1" :key="n.id">
-                      <span class="bullet" :class="{'active': n === currentSlide}"></span>
-                    </li>
-                  </ul> -->
                   <div class="phone">
                     <img :src="eachDog.phone" alt="">
                     <button 
@@ -112,13 +112,13 @@
                     <BodyMovin :jsonfile="eachDog.anim"></BodyMovin>
                   </div>
               </div>
-            </div>          
-        </div>
-        <ul class="slider-nav">
-          <li v-for="(n, index) in bullets.length" :key="n.id">
-            <img :src="bullets[index]" alt="">
-          </li>
-        </ul>
+            </div>
+            <ul class="slider-nav hidden-pc" v-if="currentSlide!=0">
+              <li v-for="n in bullets.length" :key="n.id">
+                <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
+              </li>
+            </ul>
+          </div>
       </div>
     </div>
   </div>
@@ -314,6 +314,7 @@ body {
   width: 100%;
   height: 100vh;
   overflow-y: hidden;
+  overflow-x: hidden;
   z-index: 2;  
   display: flex;
   justify-content: center;
@@ -356,10 +357,10 @@ body {
 
 @media all and (-ms-high-contrast:none)
 {
-  .adog { /*IE10*/
+  .adog { 
     transform: translateX(-50%) translateY(-50%);
   }
-  *::-ms-backdrop, .adog { /*IE11*/
+  *::-ms-backdrop, .adog { 
     transform: translateX(-50%) translateY(-50%);
   }
 }  
@@ -445,6 +446,7 @@ button.left{
 .circleWrapper.right{
   right: 5%;
   top: 0;
+  transform: translateY(-25%)
 }
 
 .circleWrapper.left{
@@ -524,9 +526,7 @@ button.left{
 
 @media screen and (min-width: 1024px){
   .phone{
-    transform: translateX(0);
-    overflow-x: hidden;
-    overflow-y: hidden;
+    transform: translateX(0) translateY(20%);
   }
 
   .phone img{
@@ -568,11 +568,37 @@ img.arrow{
 }
 
 ul.slider-nav{
+  position: absolute;
+  border-bottom: solid 1px black;
+  bottom: 20px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   list-style: none;
   margin: 20px 0 0 0;
   padding: 0;
+  z-index: 3;
+}
+
+@media all and (-ms-high-contrast:none)
+{
+  ul.slider-nav {
+    transform: translateX(-50%);
+  }
+  *::-ms-backdrop, ul.slider-nav {
+    transform: translateX(-50%);
+  }
+}  
+
+ul.slider-nav img{
+  transform: translateY(4px);
+}
+
+@media screen and (min-width: 1024px){
+  ul.slider-nav{
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%)
+  }
 }
 
 ul.slider-nav li{
@@ -580,22 +606,12 @@ ul.slider-nav li{
     margin: 0 3px;
 }
 
-ul.slider-nav li .bullet{
-    display: block;
-    width: 10px;
-    height: 10px;
-    border: 1px solid #ddd;
-    border-radius: 50%;
-    background: transparent;
+ul.slider-nav img{
+  opacity: 0.5;
 }
 
-ul.slider-nav li .bullet.active{
-    background: #bfbfbf;
-    border-color: #bfbfbf;
-}
-
-.clearfix{
-  clear: both;
+ul.slider-nav img.active{
+  opacity: 1;
 }
 
 @media screen and (max-width: 1023px){
