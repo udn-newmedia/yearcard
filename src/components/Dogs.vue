@@ -9,6 +9,7 @@
         'z-index' : getZindex(index)
       }" 
       v-show="index!=0">
+      <div class="wrapper">
         <div class="words">
           <div
             class="title wordbyword"
@@ -23,11 +24,11 @@
           <h1 
             class="title" 
             :style="{
-              'color' : fontColor
+              'color' : textColor
             }">帶我們回家<br>陪你過年，好嗎？</h1>
           <div class="text hidden-mobile" 
             :style="{
-              'color' : fontColor
+              'color' : textColor
             }">
             <p>毛色 : 黑色 短</p>
             <p>體型 : 中型、品種 : 混種</p>
@@ -38,19 +39,19 @@
           </div>
         </div>
         <img class="dog" :src="eachDog.pic">
-        <ul class="slider-nav hidden-mobile" v-if="currentSlide!=0">
-          <li v-for="n in bullets.length" :key="n.id">
-            <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
-          </li>
-        </ul>
         <div class="text hidden-pc"
           :style="{
-            'color' : fontColor
+            'color' : textColor
           }">
           <p>毛色 : 黑色 短</p>
           <p>體型 : 中型、品種 : 混種</p>
         </div>
         <Share class="hidden-pc" :href="eachDog.href"/>
+        <ul class="slider-nav hidden-mobile" v-if="currentSlide!=0">
+          <li v-for="n in bullets.length" :key="n.id">
+            <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
+          </li>
+        </ul>
         <div class="phone">
           <img :src="eachDog.phone" alt="">
           <button 
@@ -65,6 +66,12 @@
           <BodyMovin :jsonfile="eachDog.anim"></BodyMovin>
         </div>
       </div>
+      <ul class="slider-nav hidden-pc" v-if="currentSlide!=0">
+        <li v-for="n in bullets.length" :key="n.id">
+          <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -80,7 +87,7 @@ export default {
     }
   },
   computed: {
-    fontColor: function () {
+    textColor: function () {
       if (Number(this.currentSlide) % 2 === 0) {
         return '#fff'
       } else if (Number(this.currentSlide) % 2 === 1) {
@@ -119,6 +126,10 @@ export default {
   flex-direction: column;  
 }
 
+img.dog {
+  width: 548px;
+}
+
 @media screen and (max-width: 1023px){
   .dogs {
     width: 75%;
@@ -140,7 +151,7 @@ export default {
 
 @media screen and (min-width: 1024px){
   .adog {
-    width: 1084px;
+    width: 1200px;
     transform: translateX(-50%) translateY(-50%);
   }  
 }
@@ -157,13 +168,22 @@ export default {
 
 
 .text{
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 0;
+  padding-bottom: 5px;
   text-align: left;
 }
 
 .text p{
   margin: 0;
+  font-size: 21px;
+  line-height: 1.52;
+}
+
+@media screen and (max-width: 1023px){
+  .text p {
+    font-size: 18px;
+    line-height: 1.56;
+  }
 }
 
 .words{
@@ -181,6 +201,11 @@ export default {
   margin-right: 10px;
   font-weight: bold;
   font-size: 18px;
+}
+
+.wrapper{
+  position: relative; 
+  display: block;
 }
 
 @media screen and (min-width: 1024px){
@@ -203,7 +228,6 @@ export default {
   }
 }
 
-
 .phone{
   position: absolute;
   display: flex;
@@ -221,7 +245,7 @@ export default {
 
 @media screen and (min-width: 1024px){
   .phone{
-    transform: translateX(0) translateY(20%);
+    transform: translateX(0);
   }
 
   .phone img{
@@ -262,16 +286,38 @@ img.arrow{
   }  
 }
 
-@media screen and (max-width: 1023px){
-  .hidden-mobile{
-    display: none!important;
-  }
+ul.slider-nav{
+  border-bottom: solid 1px black;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 3;
+}
+
+ul.slider-nav img{
+  transform: translateY(4px);
 }
 
 @media screen and (min-width: 1024px){
-  .hidden-pc{
-    display: none!important;
+  ul.slider-nav{
+    width: 30%;
+    margin: 0 auto;
   }
+}
+
+ul.slider-nav li{
+    float: left;
+    margin: 0 3px;
+}
+
+ul.slider-nav img{
+  opacity: 0.5;
+}
+
+ul.slider-nav img.active{
+  opacity: 1;
 }
 
 </style>

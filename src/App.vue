@@ -13,11 +13,6 @@
           <i class="fa fa-angle-right fa-3" aria-hidden="true" style="font-size: 30px; transform: translateX(-75%); color: white;"></i>
         </button>
         <Dogs :list="list" :currentSlide="currentSlide" :bullets="bullets" />
-        <ul class="slider-nav hidden-pc" v-if="currentSlide!=0">
-          <li v-for="n in bullets.length" :key="n.id">
-            <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
-          </li>
-        </ul>
       </div>
     </div>
   </div>
@@ -177,6 +172,17 @@ body {
   background: gray;
 }
 
+h1 {
+  font-size: 45px;
+}
+
+@media screen and (max-width: 1023px){
+  h1 {
+    font-size: 30px;
+    margin: 1px;
+  }
+}
+
 .section {
   position: relative;
   height: 100vh;
@@ -225,53 +231,6 @@ button.left{
 
 button.left:active, button.right:active, button.left:visited, button.right:visited{
   border-style: none;
-}
-
-ul.slider-nav{
-  position: absolute;
-  border-bottom: solid 1px black;
-  bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-  list-style: none;
-  margin: 20px 0 0 0;
-  padding: 0;
-  z-index: 3;
-}
-
-@media all and (-ms-high-contrast:none)
-{
-  ul.slider-nav {
-    transform: translateX(-50%);
-  }
-  *::-ms-backdrop, ul.slider-nav {
-    transform: translateX(-50%);
-  }
-}  
-
-ul.slider-nav img{
-  transform: translateY(4px);
-}
-
-@media screen and (min-width: 1024px){
-  ul.slider-nav{
-    bottom: -50px;
-    left: 50%;
-    transform: translateX(-50%)
-  }
-}
-
-ul.slider-nav li{
-    float: left;
-    margin: 0 3px;
-}
-
-ul.slider-nav img{
-  opacity: 0.5;
-}
-
-ul.slider-nav img.active{
-  opacity: 1;
 }
 
 @media screen and (max-width: 1023px){

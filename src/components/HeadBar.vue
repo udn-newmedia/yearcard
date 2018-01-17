@@ -17,7 +17,7 @@
             </div>
         </div>
         <div id="icon">
-            <a href="."><img src="https://udn.com/upf/newmedia/image/udn_logo_circle.png"></a>
+            <a href="."><img src="https://udn.com/upf/newmedia/image/udn_logo_circle_black.png"></a>
         </div>
         <div id="hbutton" class="squre hidden-pc">
           <div id="nav-icon" :class="{open: isOpen}" @click="handleClick">
