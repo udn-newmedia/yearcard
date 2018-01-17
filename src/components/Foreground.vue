@@ -152,4 +152,16 @@ export default {
   transform: translateX(45%) translateY(45%);
 }
 
+@media screen and (max-width: 1023px){
+  .hidden-mobile{
+    display: none!important;
+  }
+}
+
+@media screen and (min-width: 1024px){
+  .hidden-pc{
+    display: none!important;
+  }
+}
+
 </style>

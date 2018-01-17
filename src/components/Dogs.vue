@@ -69,27 +69,41 @@
 </template>
 
 <script>
-
-import circle1 from '@/assets/circle-1.png'
-import circle2 from '@/assets/circle-2.png'
+import Share from './Share'
+import BodyMovin from './BodyMovin'
 
 export default {
-  name: 'Slides',
-  props: ['currentSlide'],
+  name: 'Dogs',
+  props: ['currentSlide', 'list', 'bullets'],
   data: function () {
     return {
-      circle1: circle1,
-      circle2: circle2
     }
   },
   computed: {
-    selectCircle: function () {
-      if (this.currentSlide === 0) {
-        return null
-      } else if (Number(this.currentSlide) % 2 === 0) {
-        return circle1
+    fontColor: function () {
+      if (Number(this.currentSlide) % 2 === 0) {
+        return '#fff'
       } else if (Number(this.currentSlide) % 2 === 1) {
-        return circle2
+        return '#000'
+      }
+    }
+  },
+  components: {
+    BodyMovin, Share
+  },
+  methods: {
+    showDog: function (index) {
+      if (index === Number(this.currentSlide)) {
+        return '1'
+      } else {
+        return '0'
+      }
+    },
+    getZindex: function (index) {
+      if (index === Number(this.currentSlide)) {
+        return '3'
+      } else {
+        return '2'
       }
     }
   }
@@ -97,86 +111,167 @@ export default {
 </script>
 
 <style scoped>
-
-.bg{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 1;   
+.dogs {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;  
 }
 
-.circleWrapper{
-  position: absolute;
-  background-position: center center;
-  background-size: cover;
-  width: 350px;
-  height: 350px;
+@media screen and (max-width: 1023px){
+  .dogs {
+    width: 75%;
+  }
+
+  img.dog{
+    width: 100%;
+  }
 }
 
-.circleWrapper.right{
-  right: 5%;
+.adog {
+  position: absolute;
+  left: 0;
   top: 0;
-  transform: translateY(-25%)
+  transform: translateY(-50%);
+  will-change: opacity;
+  transition: all 1s;
 }
 
-.circleWrapper.left{
-  left: 0;
-  bottom: 0;
-  transform: translateX(-25%) translateY(25%)
+@media screen and (min-width: 1024px){
+  .adog {
+    width: 1084px;
+    transform: translateX(-50%) translateY(-50%);
+  }  
 }
 
-.circleWrapper.right .circle{
+@media all and (-ms-high-contrast:none)
+{
+  .adog { 
+    transform: translateX(-50%) translateY(-50%);
+  }
+  *::-ms-backdrop, .adog { 
+    transform: translateX(-50%) translateY(-50%);
+  }
+}  
+
+
+.text{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: left;
+}
+
+.text p{
+  margin: 0;
+}
+
+.words{
+  text-align: left;
+}
+
+.title.wordbyword {
+  display: inline-block;
+  text-align: center;
+  line-height:30px;
+  width: 30px;
+  height: 30px;
+  background: red;
+  border-radius: 50%;
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+@media screen and (min-width: 1024px){
+  .words{
+    position: absolute;
+    top: 20%;
+    transform: translateY(-50%);
+  }
+
+  .text {
+    position: absolute;
+    left: 0;
+  }
+
+  .title.wordbyword {
+    line-height:50px;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+  }
+}
+
+
+.phone{
   position: absolute;
-  bottom: -50px;
-  right: -50px;
-  width: 100px;
-  height: 100px;
-}
-
-.circleWrapper.left .circle{
-  position: absolute;
-  top: -75px;
-  right: -125px;
-  width: 150px;
-  height: 150px;
-}
-
-.circle{
-  position: absolute;
-  background-position: center center;
-  background-size: cover;
-}
-
-.circleLeftTop{
-  top: 50px;
-  left: 0;
-  width: 200px;
-  height: 200px;
-  transform: translateX(-50%);
-}
-
-.circleLeftBottom{
-  bottom: 50px;
-  left: 0;
-  width: 150px;
-  height: 150px;
-  transform: translateX(-50%);
-}
-
-.circleRightTop{
-  top: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   right: 0;
-  width: 100px;
-  height: 100px;
-  transform: translateX(20%);
+  bottom: 0;
+  transform: translateX(25%);
 }
 
-.circleRightBottom{
-  bottom: 0;
-  right: 0;
-  width: 130px;
-  height: 130px;
-  transform: translateX(45%) translateY(45%);
+.phone img{
+  width: 54px;
+  margin-bottom: 8px;
+}
+
+@media screen and (min-width: 1024px){
+  .phone{
+    transform: translateX(0) translateY(20%);
+  }
+
+  .phone img{
+    width: 118px;
+    margin-bottom: 29px;
+  }
+}
+
+button.interaction {
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.87;
+  color: white;
+  border: none;
+  width: 90px;
+  height: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 4px 2px rgba(53, 53, 53, 0.14);
+}
+
+@media screen and (min-width: 1024px){
+  button.interaction {
+    width: 155px;
+    height: 60px;
+    border-radius: 30px;
+    font-size: 21px;
+  }
+}
+
+img.arrow{
+  width: 15px;
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 1024px){
+  img.arrow{
+    width: 21px;
+  }  
+}
+
+@media screen and (max-width: 1023px){
+  .hidden-mobile{
+    display: none!important;
+  }
+}
+
+@media screen and (min-width: 1024px){
+  .hidden-pc{
+    display: none!important;
+  }
 }
 
 </style>

@@ -13,14 +13,10 @@
 </template>
 
 <script>
-import bg1 from '@/assets/bg1.jpg'
-import bg2 from '@/assets/bg2.jpg'
 
 export default {
   name: 'Slides',
   props: ['currentSlide', 'list'],
-  bg1: bg1,
-  bg2: bg2,
   data: function () {
     return {
       transitionDuration: 500
