@@ -13,6 +13,7 @@
           <i class="fa fa-angle-right fa-3" aria-hidden="true" style="font-size: 30px; transform: translateX(-75%); color: white;"></i>
         </button>
         <Dogs :list="list" :currentSlide="currentSlide" :bullets="bullets" />
+        <Frame v-if="currentSlide==0"/>      
       </div>
     </div>
   </div>
@@ -23,9 +24,19 @@ import Slides from './components/Slides'
 import Headbar from './components/HeadBar'
 import Foreground from './components/Foreground'
 import Dogs from './components/Dogs'
-import dog1 from '@/assets/dog-1.png'
-import dog2 from '@/assets/dog-2.png'
-import dog3 from '@/assets/dog-3.png'
+import Frame from './components/Frame'
+import dog1 from '@/assets/d-1.png'
+import dog1Real from '@/assets/d-2.png'
+import dog2 from '@/assets/d-3.png'
+import dog2Real from '@/assets/d-4.png'
+import dog3 from '@/assets/d-5.png'
+import dog3Real from '@/assets/d-6.png'
+// import dog4 from '@/assets/d7.png'
+// import dog4_real from '@/assets/d8.png'
+// import dog5 from '@/assets/d9.png'
+// import dog5_real from '@/assets/d10.png'
+// import dog6 from '@/assets/d11.png'
+// import dog6_real from '@/assets/d12.png'
 import phone1 from '@/assets/phone4.png'
 import phone2 from '@/assets/phone3.png'
 import bullet1 from '@/assets/a-1.png'
@@ -33,6 +44,7 @@ import bullet2 from '@/assets/a-2.png'
 import bullet3 from '@/assets/a-3.png'
 import bg1 from '@/assets/bg1.jpg'
 import bg2 from '@/assets/bg2.jpg'
+import cover from '@/assets/cover.png'
 
 export default {
   name: 'app',
@@ -49,11 +61,14 @@ export default {
       originalList: [
         {
           name: 'slide0',
-          background: 'gray'
+          pic: cover,
+          maintitle: '把好運汪汪帶回家',
+          text: '在台灣，狗平均壽命8歲，但進到收容所，有的一待就是3、5年。聯合報尋訪動物之家，將一張張囚禁的笑臉，繪製成狗年賀卡。帶牠們回家、幫牠們找家，也給自己一個被愛的機會。'
         },
         {
           name: 'slide1',
           pic: dog1,
+          pic2: dog1Real,
           href: 'https://nmdap.udn.com.tw/yearcard/one.html',
           phone: phone1,
           btnColor: '#eb0029',
@@ -61,10 +76,13 @@ export default {
           fontColor: '#f5d949',
           fontBackground: '#eb0029',
           anim: './static/D1.json',
-          title: '第一隻狗狗'
+          title: '等家最久的黑嚕嚕',
+          place: '中和動物之家',
+          number: '2012080701'
         }, {
           name: 'slide2',
           pic: dog2,
+          pic2: dog2Real,
           href: 'https://nmdap.udn.com.tw/yearcard/two.html',
           phone: phone2,
           btnColor: '#ffc700',
@@ -72,10 +90,13 @@ export default {
           fontColor: '#eb0029',
           fontBackground: '#f5d949',
           anim: './static/D3.json',
-          title: '第二隻狗狗'
+          title: '風火輪小乖',
+          place: '板橋動物之家',
+          number: '2015072109'
         }, {
           name: 'slide3',
           pic: dog3,
+          pic2: dog3Real,
           href: 'https://nmdap.udn.com.tw/yearcard/three.html',
           phone: phone1,
           btnColor: '#eb0029',
@@ -83,7 +104,9 @@ export default {
           fontColor: '#f5d949',
           fontBackground: '#eb0029',
           anim: './static/D4.json',
-          title: '第三隻狗狗'
+          title: '皮皺皺五小福',
+          place: '板橋動物之家',
+          number: '2017061909-13'
         }
       ],
       bullets: [
@@ -93,7 +116,7 @@ export default {
   },
   computed: {
     list: function () {
-      for (let i = 1; i < this.originalList.length; i++) {
+      for (let i = 0; i < this.originalList.length; i++) {
         if (i % 2 === 0) {
           this.originalList[i].background = bg2
         } else if (i % 2 === 1) {
@@ -103,9 +126,7 @@ export default {
       return this.originalList
     },
     headbarBackground: function () {
-      if (this.currentSlide === 0) {
-        return 'gray'
-      } else if (this.currentSlide % 2 === 1) {
+      if (this.currentSlide % 2 === 1) {
         return bg1
       } else if (this.currentSlide % 2 === 0) {
         return bg2
@@ -113,7 +134,7 @@ export default {
     }
   },
   components: {
-    Foreground, Slides, Dogs, Headbar
+    Foreground, Slides, Dogs, Headbar, Frame
   },
   created: function () {
     if (this.getParameterByName('dog')) {
@@ -168,8 +189,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  background: gray;
 }
 
 h1 {
@@ -180,6 +199,18 @@ h1 {
   h1 {
     font-size: 30px;
     margin: 1px;
+  }
+}
+
+@media screen and (max-width: 1023px){
+  .hidden-mobile{
+    display: none!important;
+  }
+}
+
+@media screen and (min-width: 1024px){
+  .hidden-pc{
+    display: none!important;
   }
 }
 
@@ -214,6 +245,7 @@ button.right{
   border: none;
   border-radius: 50%;
   transform: translateX(50%) translateY(-50%);
+  z-index: 999;
 }
 
 button.left{
@@ -227,22 +259,10 @@ button.left{
   border: none;
   border-radius: 50%;
   transform: translateX(-50%) translateY(-50%);
+  z-index: 999;
 }
 
 button.left:active, button.right:active, button.left:visited, button.right:visited{
   border-style: none;
 }
-
-@media screen and (max-width: 1023px){
-  .hidden-mobile{
-    display: none!important;
-  }
-}
-
-@media screen and (min-width: 1024px){
-  .hidden-pc{
-    display: none!important;
-  }
-}
-
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="dogs" v-if="currentSlide!=0">
+  <div class="dogs">
     <div 
       class="adog"
       v-for="(eachDog, index) in list" 
@@ -7,10 +7,11 @@
       :style="{
         'opacity' : showDog(index),
         'z-index' : getZindex(index)
-      }" 
-      v-show="index!=0">
+      }">
       <div class="wrapper">
-        <div class="words">
+        <div 
+          class="words"
+          :class="{'shift': currentSlide!=0}">
           <div
             class="title wordbyword"
             v-for="(word, index) in eachDog.title"
@@ -22,37 +23,73 @@
             {{word}}
           </div>
           <h1 
-            class="title" 
+            class="title"
+            v-if="currentSlide!=0"
             :style="{
               'color' : textColor
             }">帶我們回家<br>陪你過年，好嗎？</h1>
+          <h1 
+            class="title hidden-mobile"
+            v-else
+            :style="{
+              'color' : textColor
+            }">{{list[currentSlide].maintitle}}</h1>
           <div class="text hidden-mobile" 
             :style="{
               'color' : textColor
             }">
-            <p>毛色 : 黑色 短</p>
-            <p>體型 : 中型、品種 : 混種</p>
+            <p>{{list[currentSlide].text}}</p>
+            <p>{{list[currentSlide].place}}</p>
+            <p class="number">{{list[currentSlide].number}}</p>
             <Share
               style="text-align: center;
                     margin-top: 30px;" 
-              :href="eachDog.href"/>
+              :href="eachDog.href"
+              v-show="currentSlide!=0"/>
           </div>
         </div>
-        <img class="dog" :src="eachDog.pic">
+        <div class="imgWrapper" v-if="currentSlide!=0">
+          <img 
+            class="dog"
+            :class="{'show': real}"
+            :src="eachDog.pic2"
+            style="position: absolute; top: 0;"
+            v-show="currentSlide!=0">
+          <img
+            class="dog"
+            :class="{
+              'show': !real
+            }" 
+            :src="eachDog.pic">          
+        </div>
+        <div class="imgWrapper" v-else>
+          <img
+            class="dog cover"
+            :src="eachDog.pic">                    
+        </div>
+        <h1 
+          class="title hidden-pc"
+          :style="{
+            'color' : textColor
+          }">{{list[currentSlide].maintitle}}</h1>
         <div class="text hidden-pc"
           :style="{
             'color' : textColor
           }">
-          <p>毛色 : 黑色 短</p>
-          <p>體型 : 中型、品種 : 混種</p>
+          <p>{{list[currentSlide].text}}</p>
+          <p>{{list[currentSlide].place}}</p>
+          <p class="number">{{list[currentSlide].number}}</p>
         </div>
-        <Share class="hidden-pc" :href="eachDog.href"/>
+        <Share 
+          class="hidden-pc" 
+          :href="eachDog.href"
+          v-show="currentSlide!=0"/>
         <ul class="slider-nav hidden-mobile" v-if="currentSlide!=0">
           <li v-for="n in bullets.length" :key="n.id">
             <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
           </li>
         </ul>
-        <div class="phone">
+        <div class="phone" v-show="currentSlide!=0">
           <img :src="eachDog.phone" alt="">
           <button 
             class="interaction"
@@ -78,12 +115,16 @@
 <script>
 import Share from './Share'
 import BodyMovin from './BodyMovin'
+import coverImg from '../assets/cover.png'
 
 export default {
   name: 'Dogs',
   props: ['currentSlide', 'list', 'bullets'],
   data: function () {
     return {
+      coverImg: coverImg,
+      real: false,
+      interval: 3000
     }
   },
   computed: {
@@ -97,6 +138,11 @@ export default {
   },
   components: {
     BodyMovin, Share
+  },
+  mounted: function () {
+    setInterval(() => {
+      this.real = !this.real
+    }, this.interval)
   },
   methods: {
     showDog: function (index) {
@@ -128,6 +174,19 @@ export default {
 
 img.dog {
   width: 548px;
+  opacity: 0;
+  will-change: opacity;
+  transition: all 0.5s;
+}
+
+img.dog.show {
+  opacity: 1;
+}
+
+img.dog.cover {
+  width: 1062px;
+  transform: translateX(10%) translateY(10%);
+  opacity: 1;  
 }
 
 @media screen and (max-width: 1023px){
@@ -138,6 +197,11 @@ img.dog {
   img.dog{
     width: 100%;
   }
+
+  img.dog.cover {
+    width: 100%;
+    transform: none;
+  }    
 }
 
 .adog {
@@ -190,6 +254,10 @@ img.dog {
   text-align: left;
 }
 
+.title{
+  text-align: left;
+}
+
 .title.wordbyword {
   display: inline-block;
   text-align: center;
@@ -208,11 +276,22 @@ img.dog {
   display: block;
 }
 
+.imgWrapper{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media screen and (min-width: 1024px){
   .words{
     position: absolute;
-    top: 20%;
     transform: translateY(-50%);
+    width: 40%;
+  }
+
+  .shift{
+    top: 20%;
   }
 
   .text {
@@ -320,4 +399,7 @@ ul.slider-nav img.active{
   opacity: 1;
 }
 
+.number{
+  text-decoration: underline;
+}
 </style>
