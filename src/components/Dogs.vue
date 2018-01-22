@@ -8,10 +8,22 @@
         'opacity' : showDog(index),
         'z-index' : getZindex(index)
       }">
-      <div class="wrapper">
+      <div class="wrapper" v-if="currentSlide < list.length-2">
         <div 
           class="words"
           :class="{'shift': currentSlide!=0}">
+          <h1 
+            class="title"
+            v-if="currentSlide!=0"
+            :style="{
+              'color' : textColor
+            }">帶我們回家<br>陪你過年好嗎？</h1>
+          <h1 
+            class="title hidden-mobile"
+            v-else
+            :style="{
+              'color' : textColor
+            }">{{list[currentSlide].maintitle}}</h1>
           <div
             class="title wordbyword"
             v-for="(word, index) in eachDog.title"
@@ -22,18 +34,6 @@
             }">
             {{word}}
           </div>
-          <h1 
-            class="title"
-            v-if="currentSlide!=0"
-            :style="{
-              'color' : textColor
-            }">帶我們回家<br>陪你過年，好嗎？</h1>
-          <h1 
-            class="title hidden-mobile"
-            v-else
-            :style="{
-              'color' : textColor
-            }">{{list[currentSlide].maintitle}}</h1>
           <div class="text hidden-mobile" 
             :style="{
               'color' : textColor
@@ -103,6 +103,37 @@
           <BodyMovin :jsonfile="eachDog.anim"></BodyMovin>
         </div>
       </div>
+      <div class="wrapper secondlastpage" v-else-if="currentSlide === list.length-2">
+        <img class="cage" :src="cage">
+        <div class="lastwords">
+          <h1>我們也在等家</h1>
+          <p>零安樂死政策上路後，各地動物之家，依舊不是貓狗們真正的家，以領養代替購買，更多認養資訊資訊，請見<u>縣市立收容所網站</u>。</p>
+          <img class="lastdog" :src="lastdog">
+        </div>
+        <p><br></p>
+        <p><br></p>
+      </div>
+      <div class="wrapper" v-else>
+        <Editor>
+          <div>內容製作：連珮宇、蔡佩蓉</div>
+          <div>插畫：黃微庭</div>
+          <div>動畫：許藹雯</div>
+          <div>網頁設計：許瑋琳</div>
+          <div>攝影：林麒瑋</div>          
+          <div>網頁製作：方泰鈞、鄭偉廷</div>          
+          <div>監製：蔡幸怡、董谷音、潘如瑩</div>          
+          <div>2018.02</div>
+        </Editor>
+        <p><br></p>
+        <OfficialShare :href="eachDog.href"/>
+        <p><br></p>
+        <button class="questionnaire">填寫閱讀體驗問卷</button>
+      </div>
+      <ul class="slider-nav hidden-mobile lasttwopages" v-if="currentSlide >= list.length-2">
+        <li v-for="n in bullets.length" :key="n.id">
+          <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
+        </li>
+      </ul>        
       <ul class="slider-nav hidden-pc" v-if="currentSlide!=0">
         <li v-for="n in bullets.length" :key="n.id">
           <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
@@ -114,17 +145,21 @@
 
 <script>
 import Share from './Share'
+import OfficialShare from './OfficialShare'
 import BodyMovin from './BodyMovin'
-import coverImg from '../assets/cover.png'
+import Editor from './Editor'
+import cage from '@/assets/page2_01.png'
+import lastdog from '@/assets/page2_02.png'
 
 export default {
   name: 'Dogs',
   props: ['currentSlide', 'list', 'bullets'],
   data: function () {
     return {
-      coverImg: coverImg,
       real: false,
-      interval: 3000
+      interval: 3000,
+      cage: cage,
+      lastdog: lastdog
     }
   },
   computed: {
@@ -137,7 +172,7 @@ export default {
     }
   },
   components: {
-    BodyMovin, Share
+    BodyMovin, Share, Editor, OfficialShare
   },
   mounted: function () {
     setInterval(() => {
@@ -199,7 +234,7 @@ img.dog.cover {
   }
 
   img.dog.cover {
-    width: 100%;
+    width: 125%;
     transform: none;
   }    
 }
@@ -232,8 +267,8 @@ img.dog.cover {
 
 
 .text{
-  padding-top: 0;
-  padding-bottom: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   text-align: left;
 }
 
@@ -244,6 +279,11 @@ img.dog.cover {
 }
 
 @media screen and (max-width: 1023px){
+  .text{
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
   .text p {
     font-size: 18px;
     line-height: 1.56;
@@ -251,11 +291,21 @@ img.dog.cover {
 }
 
 .words{
-  text-align: left;
+  text-align: center;
 }
 
 .title{
-  text-align: left;
+  text-align: center;
+}
+
+@media screen and (min-width: 1024px){
+  .words{
+    text-align: left;
+  }
+
+  .title{
+    text-align: left;
+  }  
 }
 
 .title.wordbyword {
@@ -266,7 +316,7 @@ img.dog.cover {
   height: 30px;
   background: red;
   border-radius: 50%;
-  margin-right: 10px;
+  margin: 5px 5px 5px 0;
   font-weight: bold;
   font-size: 18px;
 }
@@ -283,11 +333,57 @@ img.dog.cover {
   align-items: center;
 }
 
+.wrapper.secondlastpage, .wrapper.secondlastpage .lastwords{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.wrapper.secondlastpage h1, .wrapper.secondlastpage p{
+  margin-bottom: 0;
+  font-weight: normal;
+}
+
+.wrapper.secondlastpage img.cage{
+  width: 40%;
+}
+
+img.lastdog{
+  width: 60%;
+  align-self: flex-end;
+}
+
+@media screen and (min-width: 1024px){
+  .wrapper.secondlastpage{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .wrapper.secondlastpage img.cage{
+    width: 20%;
+    margin-right: 10%;
+  }
+
+  .wrapper.secondlastpage .lastwords{
+    width: 70%;
+  }
+
+  .wrapper.secondlastpage img.lastdog{
+    width: 265px;
+    margin-top: 10%;
+    align-self: flex-end;
+  }
+
+  .lastwords p{
+    font-size: 21px;
+  }
+}
+
 @media screen and (min-width: 1024px){
   .words{
     position: absolute;
     transform: translateY(-50%);
-    width: 40%;
+    width: 30%;
   }
 
   .shift{
@@ -314,7 +410,7 @@ img.dog.cover {
   align-items: center;
   right: 0;
   bottom: 0;
-  transform: translateX(25%);
+  /* transform: translateX(25%); */
 }
 
 .phone img{
@@ -323,9 +419,9 @@ img.dog.cover {
 }
 
 @media screen and (min-width: 1024px){
-  .phone{
+  /* .phone{
     transform: translateX(0);
-  }
+  } */
 
   .phone img{
     width: 118px;
@@ -335,7 +431,7 @@ img.dog.cover {
 
 button.interaction {
   font-family: inherit;
-  font-size: 15px;
+  font-size: 12px;
   line-height: 1.87;
   color: white;
   border: none;
@@ -373,9 +469,15 @@ ul.slider-nav{
   margin: 0;
   padding: 0;
   z-index: 3;
+  max-width: 100%;
+}
+
+ul.slider-nav.lasttwopages{
+  margin-top: 10%;
 }
 
 ul.slider-nav img{
+  width: 30px;
   transform: translateY(4px);
 }
 
@@ -402,4 +504,25 @@ ul.slider-nav img.active{
 .number{
   text-decoration: underline;
 }
+
+button.questionnaire{
+  font-family: "Microsoft JhengHei";
+  width: 100%;
+  height: 70px;
+  border-radius: 35px;
+  font-size: 18px;
+  color: #636363;
+  background-color: #ffffff;
+  box-shadow: 0px 3px 7px 0 rgba(0, 0, 0, 0.1);
+  border: solid 2px #dcdcdc;
+  cursor: pointer;  
+}
+
+@media screen and (min-width: 1024px){
+  button.questionnaire{
+    width: 500px;
+    height: 100px;
+  }
+}
+
 </style>
