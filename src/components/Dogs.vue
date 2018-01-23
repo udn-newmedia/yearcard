@@ -9,9 +9,27 @@
         'z-index' : getZindex(index)
       }">
       <div class="wrapper" v-if="currentSlide < list.length-2">
+        <div class="imgWrapper hidden-mobile" v-if="currentSlide!=0">
+          <img 
+            class="dog"
+            :class="{'show': real}"
+            :src="eachDog.pic2"
+            style="position: absolute; top: 0;"
+            v-show="currentSlide!=0">
+          <img
+            class="dog"
+            :class="{
+              'show': !real
+            }" 
+            :src="eachDog.pic">          
+        </div>
+        <div class="imgWrapper hidden-mobile" v-else>
+          <img
+            class="dog cover"
+            :src="eachDog.pic">                    
+        </div>        
         <div 
-          class="words"
-          :class="{'shift': currentSlide!=0}">
+          class="words">
           <h1 
             class="title"
             v-if="currentSlide!=0"
@@ -48,7 +66,7 @@
               v-show="currentSlide!=0"/>
           </div>
         </div>
-        <div class="imgWrapper" v-if="currentSlide!=0">
+        <div class="imgWrapper hidden-pc" v-if="currentSlide!=0">
           <img 
             class="dog"
             :class="{'show': real}"
@@ -62,7 +80,7 @@
             }" 
             :src="eachDog.pic">          
         </div>
-        <div class="imgWrapper" v-else>
+        <div class="imgWrapper hidden-pc" v-else>
           <img
             class="dog cover"
             :src="eachDog.pic">                    
@@ -93,6 +111,7 @@
           <img :src="eachDog.phone" alt="">
           <button 
             class="interaction"
+            @click="gotoAR(eachDog.ARlink)"
             :style="{
               'background-color': eachDog.btnColor,
               'color': eachDog.btntxtColor
@@ -100,7 +119,7 @@
             <i class="fa fa-arrow-up" aria-hidden="true"></i>
             與我互動
           </button>
-          <BodyMovin :jsonfile="eachDog.anim"></BodyMovin>
+          <BodyMovin :jsonfile="eachDog.anim" :play="currentSlide === index"></BodyMovin>
         </div>
       </div>
       <div class="wrapper secondlastpage" v-else-if="currentSlide === list.length-2">
@@ -193,6 +212,9 @@ export default {
       } else {
         return '2'
       }
+    },
+    gotoAR: function (link) {
+      window.open(link, '_blank')
     }
   }
 }
@@ -382,12 +404,8 @@ img.lastdog{
 @media screen and (min-width: 1024px){
   .words{
     position: absolute;
-    transform: translateY(-50%);
+    top: 0;
     width: 30%;
-  }
-
-  .shift{
-    top: 20%;
   }
 
   .text {
@@ -411,6 +429,10 @@ img.lastdog{
   right: 0;
   bottom: 0;
   /* transform: translateX(25%); */
+}
+
+.phone button{
+  cursor: pointer;
 }
 
 .phone img{

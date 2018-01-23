@@ -91,10 +91,11 @@ export default {
           btntxtColor: '#ffc700',
           fontColor: '#f5d949',
           fontBackground: '#eb0029',
-          anim: './static/D1.json',
+          anim: './static/D7.json',
           title: '風火輪小乖',
           place: '板橋動物之家',
-          number: '2015072109'
+          number: '2015072109',
+          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/141368526550584/'
         }, {
           name: 'slide2',
           pic: dog2,
@@ -105,10 +106,11 @@ export default {
           btntxtColor: '#eb0029',
           fontColor: '#eb0029',
           fontBackground: '#f5d949',
-          anim: './static/D3.json',
+          anim: './static/D8.json',
           title: '大耳朵桃桃',
           place: '板橋動物之家',
-          number: '2015082705'
+          number: '2015082705',
+          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/2006044492982527/'
         }, {
           name: 'slide3',
           pic: dog3,
@@ -119,10 +121,11 @@ export default {
           btntxtColor: '#ffc700',
           fontColor: '#f5d949',
           fontBackground: '#eb0029',
-          anim: './static/D4.json',
-          title: '等家最久的黑嚕嚕',
+          anim: './static/D3.json',
+          title: '等家最久黑嚕嚕',
           place: '中和動物之家',
-          number: '2012080701'
+          number: '2012080701',
+          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/1438851946237312/'
         }, {
           name: 'slide4',
           pic: dog4,
@@ -136,7 +139,8 @@ export default {
           anim: './static/D5.json',
           title: '風火輪小白',
           place: '板橋動物之家',
-          number: '2015100801'
+          number: '2015100801',
+          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/586046791745349/'
         }, {
           name: 'slide5',
           pic: dog5,
@@ -150,7 +154,8 @@ export default {
           anim: './static/D6.json',
           title: '皮皺皺五小福',
           place: '板橋動物之家',
-          number: '2017061909-13'
+          number: '2017061909-13',
+          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/1002034936601268/'
         }, {
           name: 'slide6',
           pic: dog6,
@@ -161,10 +166,11 @@ export default {
           btntxtColor: '#eb0029',
           fontColor: '#eb0029',
           fontBackground: '#f5d949',
-          anim: './static/D7.json',
+          anim: './static/D1.json',
           title: '啾咪黑美眉',
           place: '板橋動物之家',
-          number: '2017090106'
+          number: '2017090106',
+          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/172002786863502/'
         }, {
           name: 'slide7'
         }, {
