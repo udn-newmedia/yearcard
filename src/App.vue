@@ -60,6 +60,7 @@ export default {
   name: 'app',
   data: function () {
     return {
+      testjson: './static/D7.json',
       panOnce: false,
       currentSlide: 0,
       phone1: phone1,
@@ -219,7 +220,7 @@ export default {
         this.panOnce = true
         setTimeout(() => {
           this.panOnce = false
-        }, 500)
+        }, 750)
       }
     }.bind(this))
 
@@ -229,7 +230,7 @@ export default {
         this.panOnce = true
         setTimeout(() => {
           this.panOnce = false
-        }, 500)
+        }, 750)
       }
     }.bind(this))
   },
@@ -245,12 +246,24 @@ export default {
     },
     clickPre: function () {
       if (this.currentSlide > 0) {
-        this.currentSlide--
+        if (!this.panOnce) {
+          this.currentSlide--
+          this.panOnce = true
+          setTimeout(() => {
+            this.panOnce = false
+          }, 750)
+        }
       }
     },
     clickNext: function () {
       if (this.currentSlide < this.list.length - 1) {
-        this.currentSlide++
+        if (!this.panOnce) {
+          this.currentSlide++
+          this.panOnce = true
+          setTimeout(() => {
+            this.panOnce = false
+          }, 750)
+        }
       }
     },
     showDog: function (index) {

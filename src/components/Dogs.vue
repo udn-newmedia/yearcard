@@ -119,7 +119,9 @@
             <i class="fa fa-arrow-up" aria-hidden="true"></i>
             與我互動
           </button>
-          <BodyMovin :jsonfile="eachDog.anim" :play="currentSlide === index"></BodyMovin>
+          <!-- <BodyMovin 
+            :jsonfile="eachDog.anim"></BodyMovin> -->
+          <CanvasAnim :spritesheet="test" spriteWidth="190" spriteHeight="20400" rows="120" cols="1" duration="4"></CanvasAnim>
         </div>
       </div>
       <div class="wrapper secondlastpage" v-else-if="currentSlide === list.length-2">
@@ -166,6 +168,7 @@
 import Share from './Share'
 import OfficialShare from './OfficialShare'
 import BodyMovin from './BodyMovin'
+import CanvasAnim from './CanvasAnim'
 import Editor from './Editor'
 import cage from '@/assets/page2_01.png'
 import lastdog from '@/assets/page2_02.png'
@@ -178,7 +181,8 @@ export default {
       real: false,
       interval: 3000,
       cage: cage,
-      lastdog: lastdog
+      lastdog: lastdog,
+      test: './static/S1.png'
     }
   },
   computed: {
@@ -191,7 +195,7 @@ export default {
     }
   },
   components: {
-    BodyMovin, Share, Editor, OfficialShare
+    BodyMovin, Share, Editor, OfficialShare, CanvasAnim
   },
   mounted: function () {
     setInterval(() => {
