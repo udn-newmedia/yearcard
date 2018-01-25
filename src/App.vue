@@ -10,12 +10,21 @@
           <i class="fa fa-angle-left fa-3" aria-hidden="true" style="font-size: 30px; transform: translateX(75%); color: white;"></i>
         </button>
         <button class="right" v-if="currentSlide!=list.length-1" @click="clickNext">
-          <i class="fa fa-angle-right fa-3" aria-hidden="true" style="font-size: 30px; transform: translateX(-75%); color: white;"></i>
+          <i 
+            class="fa fa-angle-right fa-3"
+            :class="{'rightanim':currentSlide==0}"
+            aria-hidden="true" 
+            style="font-size: 30px; transform: translateX(-75%); color: white;"></i>
         </button>
         <Dogs :list="list" :currentSlide="currentSlide" :bullets="bullets" />
         <Frame v-if="currentSlide==0"/>
       </div>
     </div>
+    <!-- <ul class="slider-nav" v-if="currentSlide!=0">
+      <li v-for="n in bullets.length" :key="n.id">
+        <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
+      </li>
+    </ul>     -->
     <div class="logoblock" v-show="currentSlide === list.length - 1">
       <Logo/>
     </div>      
@@ -60,7 +69,6 @@ export default {
   name: 'app',
   data: function () {
     return {
-      testjson: './static/D7.json',
       panOnce: false,
       currentSlide: 0,
       phone1: phone1,
@@ -92,7 +100,7 @@ export default {
           btntxtColor: '#ffc700',
           fontColor: '#f5d949',
           fontBackground: '#eb0029',
-          anim: './static/D7.json',
+          anim: './static/S7.png',
           title: '風火輪小乖',
           place: '板橋動物之家',
           number: '2015072109',
@@ -107,7 +115,7 @@ export default {
           btntxtColor: '#eb0029',
           fontColor: '#eb0029',
           fontBackground: '#f5d949',
-          anim: './static/D8.json',
+          anim: './static/S8.png',
           title: '大耳朵桃桃',
           place: '板橋動物之家',
           number: '2015082705',
@@ -122,7 +130,7 @@ export default {
           btntxtColor: '#ffc700',
           fontColor: '#f5d949',
           fontBackground: '#eb0029',
-          anim: './static/D3.json',
+          anim: './static/S3.png',
           title: '等家最久黑嚕嚕',
           place: '中和動物之家',
           number: '2012080701',
@@ -137,7 +145,7 @@ export default {
           btntxtColor: '#eb0029',
           fontColor: '#eb0029',
           fontBackground: '#f5d949',
-          anim: './static/D5.json',
+          anim: './static/S5.png',
           title: '風火輪小白',
           place: '板橋動物之家',
           number: '2015100801',
@@ -152,7 +160,7 @@ export default {
           btntxtColor: '#ffc700',
           fontColor: '#f5d949',
           fontBackground: '#eb0029',
-          anim: './static/D6.json',
+          anim: './static/S6.png',
           title: '皮皺皺五小福',
           place: '板橋動物之家',
           number: '2017061909-13',
@@ -167,7 +175,7 @@ export default {
           btntxtColor: '#eb0029',
           fontColor: '#eb0029',
           fontBackground: '#f5d949',
-          anim: './static/D1.json',
+          anim: './static/S1.png',
           title: '啾咪黑美眉',
           place: '板橋動物之家',
           number: '2017090106',
@@ -369,6 +377,81 @@ button.left{
 
 button.left:active, button.right:active, button.left:visited, button.right:visited{
   border-style: none;
+}
+
+ul.slider-nav{
+  /* position: fixed;
+  bottom: 64px;
+  left: 50%;
+  transform: translateX(-50%); */
+  border-bottom: solid 1px black;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 999;
+  max-width: 100%;
+}
+
+ul.slider-nav.lasttwopages{
+  margin-top: 10%;
+}
+
+ul.slider-nav img{
+  width: 30px;
+  transform: translateY(4px);
+}
+
+@media screen and (min-width: 1024px){
+  ul.slider-nav{
+    width: 20%;
+    margin: 0 auto;
+  }
+}
+
+ul.slider-nav li{
+    float: left;
+    margin: 0 3px;
+}
+
+ul.slider-nav img{
+  opacity: 0.3;
+}
+
+ul.slider-nav img.active{
+  opacity: 1;
+}
+
+.rightanim {
+  animation-name: bounce;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    -webkit-transform: translate3d(-75%, 0, 0);
+    transform: translate3d(-75%, 0, 0);
+  }
+  40%, 43% {
+      -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+      animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+      -webkit-transform: translate3d(-25px, 0, 0);
+      transform: translate3d(-25px, 0, 0);
+  }
+  70% {
+      -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+      animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+      -webkit-transform: translate3d(-20px, 0, 0);
+      transform: translate3d(-20px, 0, 0);
+  }
+  90% {
+      -webkit-transform: translate3d(-100%, 0, 0);
+      transform: translate3d(-100%, 0, 0);
+  }
 }
 
 .logoblock{

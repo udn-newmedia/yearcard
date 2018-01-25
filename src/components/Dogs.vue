@@ -57,8 +57,8 @@
               'color' : textColor
             }">
             <p>{{list[currentSlide].text}}</p>
-            <p>{{list[currentSlide].place}}</p>
-            <p class="number">{{list[currentSlide].number}}</p>
+            <p class="underline">{{list[currentSlide].place}}</p>
+            <!-- <p class="number">{{list[currentSlide].number}}</p> -->
             <Share
               style="text-align: center;
                     margin-top: 30px;" 
@@ -95,8 +95,8 @@
             'color' : textColor
           }">
           <p>{{list[currentSlide].text}}</p>
-          <p>{{list[currentSlide].place}}</p>
-          <p class="number">{{list[currentSlide].number}}</p>
+          <p class="underline">{{list[currentSlide].place}}</p>
+          <!-- <p class="number">{{list[currentSlide].number}}</p> -->
         </div>
         <Share 
           class="hidden-pc" 
@@ -119,9 +119,7 @@
             <i class="fa fa-arrow-up" aria-hidden="true"></i>
             與我互動
           </button>
-          <!-- <BodyMovin 
-            :jsonfile="eachDog.anim"></BodyMovin> -->
-          <CanvasAnim :spritesheet="test" spriteWidth="190" spriteHeight="20400" rows="120" cols="1" duration="4"></CanvasAnim>
+          <CanvasAnim :spritesheet="eachDog.anim" spriteWidth="190" spriteHeight="20400" rows="120" cols="1" duration="4" :play="currentSlide==index"></CanvasAnim>
         </div>
       </div>
       <div class="wrapper secondlastpage" v-else-if="currentSlide === list.length-2">
@@ -131,10 +129,12 @@
           <p>零安樂死政策上路後，各地動物之家，依舊不是貓狗們真正的家，以領養代替購買，更多認養資訊資訊，請見<u>縣市立收容所網站</u>。</p>
           <img class="lastdog" :src="lastdog">
         </div>
-        <p><br></p>
-        <p><br></p>
+        <!-- <p><br></p>
+        <p><br></p> -->
       </div>
       <div class="wrapper" v-else>
+        <OfficialShare class="hidden-pc" :href="eachDog.href"/>
+        <br>
         <Editor>
           <div>內容製作：連珮宇、蔡佩蓉</div>
           <div>插畫：黃微庭</div>
@@ -145,16 +145,16 @@
           <div>監製：蔡幸怡、董谷音、潘如瑩</div>          
           <div>2018.02</div>
         </Editor>
-        <p><br></p>
-        <OfficialShare :href="eachDog.href"/>
-        <p><br></p>
+        <p class="hidden-mobile"><br></p>
+        <OfficialShare class="hidden-mobile" :href="eachDog.href"/>
+        <br>
         <button class="questionnaire">填寫閱讀體驗問卷</button>
       </div>
-      <ul class="slider-nav hidden-mobile lasttwopages" v-if="currentSlide >= list.length-2">
+      <!-- <ul class="slider-nav hidden-mobile lasttwopages" v-if="currentSlide >= list.length-2">
         <li v-for="n in bullets.length" :key="n.id">
           <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
         </li>
-      </ul>        
+      </ul>-->
       <ul class="slider-nav hidden-pc" v-if="currentSlide!=0">
         <li v-for="n in bullets.length" :key="n.id">
           <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
@@ -167,9 +167,9 @@
 <script>
 import Share from './Share'
 import OfficialShare from './OfficialShare'
-import BodyMovin from './BodyMovin'
 import CanvasAnim from './CanvasAnim'
 import Editor from './Editor'
+import Logo from './Logo'
 import cage from '@/assets/page2_01.png'
 import lastdog from '@/assets/page2_02.png'
 
@@ -181,8 +181,7 @@ export default {
       real: false,
       interval: 3000,
       cage: cage,
-      lastdog: lastdog,
-      test: './static/S1.png'
+      lastdog: lastdog
     }
   },
   computed: {
@@ -195,7 +194,7 @@ export default {
     }
   },
   components: {
-    BodyMovin, Share, Editor, OfficialShare, CanvasAnim
+    Share, Editor, OfficialShare, CanvasAnim, Logo
   },
   mounted: function () {
     setInterval(() => {
@@ -269,7 +268,7 @@ img.dog.cover {
   position: absolute;
   left: 0;
   top: 0;
-  transform: translateY(-50%);
+  transform: translateY(-55%);
   will-change: opacity;
   transition: all 1s;
 }
@@ -277,6 +276,7 @@ img.dog.cover {
 @media screen and (min-width: 1024px){
   .adog {
     width: 1200px;
+    height: auto;
     transform: translateX(-50%) translateY(-50%);
   }  
 }
@@ -350,6 +350,7 @@ img.dog.cover {
 .wrapper{
   position: relative; 
   display: block;
+  height: 100%;
 }
 
 .imgWrapper{
@@ -432,7 +433,7 @@ img.lastdog{
   align-items: center;
   right: 0;
   bottom: 0;
-  /* transform: translateX(25%); */
+  transform: translateX(25%);
 }
 
 .phone button{
@@ -445,9 +446,9 @@ img.lastdog{
 }
 
 @media screen and (min-width: 1024px){
-  /* .phone{
-    transform: translateX(0);
-  } */
+  .phone{
+    transform: translateX(-50%);
+  }
 
   .phone img{
     width: 118px;
@@ -527,7 +528,7 @@ ul.slider-nav img.active{
   opacity: 1;
 }
 
-.number{
+.underline{
   text-decoration: underline;
 }
 

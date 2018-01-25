@@ -6,7 +6,7 @@
 
 export default {
   name: 'CanvasAnim',
-  props: ['spritesheet', 'spriteWidth', 'spriteHeight', 'rows', 'cols', 'duration'],
+  props: ['spritesheet', 'spriteWidth', 'spriteHeight', 'rows', 'cols', 'duration', 'play'],
   data: function () {
     return {
       canvasSprite: {
@@ -33,7 +33,13 @@ export default {
       return Math.round(1000 / ((this.rows * this.cols) / this.duration))
     }
   },
+  watch: {
+    play: function (val) {
+
+    }
+  },
   mounted: function () {
+    if (!this.spritesheet) return
     if (this.interval === 0) {
       this.interval = setInterval(this.drawCanvas, this.frequency)
     }
