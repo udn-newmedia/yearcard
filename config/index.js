@@ -49,6 +49,9 @@ module.exports = {
     one: path.resolve(__dirname, '../dist/one.html'),
     two: path.resolve(__dirname, '../dist/two.html'),
     three: path.resolve(__dirname, '../dist/three.html'),
+    four: path.resolve(__dirname, '../dist/four.html'),
+    five: path.resolve(__dirname, '../dist/five.html'),
+    six: path.resolve(__dirname, '../dist/six.html'),
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',

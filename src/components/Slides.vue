@@ -13,7 +13,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'Slides',
   props: ['currentSlide', 'list'],
@@ -47,5 +46,4 @@ export default {
   width: 100%;
   overflow-x: hidden;
 }
-
 </style>

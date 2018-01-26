@@ -88,7 +88,7 @@
           'background-image' : 'url(' + selectCircle + ')'
         }">
       </div>      
-    </div>
+    </div>    
   </div>
 </template>
 

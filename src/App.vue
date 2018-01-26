@@ -16,15 +16,13 @@
             aria-hidden="true" 
             style="font-size: 30px; transform: translateX(-75%); color: white;"></i>
         </button>
-        <Dogs :list="list" :currentSlide="currentSlide" :bullets="bullets" />
+        <Dogs
+          :list="list" 
+          :currentSlide="currentSlide" 
+          :bullets="bullets"/>
         <Frame v-if="currentSlide==0"/>
       </div>
     </div>
-    <!-- <ul class="slider-nav" v-if="currentSlide!=0">
-      <li v-for="n in bullets.length" :key="n.id">
-        <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
-      </li>
-    </ul>     -->
     <div class="logoblock" v-show="currentSlide === list.length - 1">
       <Logo/>
     </div>      
@@ -36,6 +34,7 @@ import * as Hammer from 'Hammerjs'
 import Slides from './components/Slides'
 import Headbar from './components/HeadBar'
 import Foreground from './components/Foreground'
+import CanvasAnim from './components/CanvasAnim'
 import Dogs from './components/Dogs'
 import Frame from './components/Frame'
 import Logo from './components/Logo'
@@ -63,7 +62,7 @@ import bullet7 from '@/assets/a-7.png'
 import bullet8 from '@/assets/a-8.png'
 import bg1 from '@/assets/bg1.jpg'
 import bg2 from '@/assets/bg2.jpg'
-import cover from '@/assets/cover.png'
+import coverpic from '@/assets/cover.png'
 
 export default {
   name: 'app',
@@ -86,7 +85,7 @@ export default {
       originalList: [
         {
           name: 'slide0',
-          pic: cover,
+          pic: coverpic,
           maintitle: '把好運汪汪帶回家',
           text: '在台灣，狗平均壽命8歲，但進到收容所，有的一待就是3、5年。聯合報尋訪動物之家，將一張張囚禁的笑臉，繪製成狗年賀卡。帶牠們回家、幫牠們找家，也給自己一個被愛的機會。'
         },
@@ -139,7 +138,7 @@ export default {
           name: 'slide4',
           pic: dog4,
           pic2: dog4Real,
-          href: 'https://nmdap.udn.com.tw/yearcard/one.html',
+          href: 'https://nmdap.udn.com.tw/yearcard/four.html',
           phone: phone2,
           btnColor: '#ffc700',
           btntxtColor: '#eb0029',
@@ -154,7 +153,7 @@ export default {
           name: 'slide5',
           pic: dog5,
           pic2: dog5Real,
-          href: 'https://nmdap.udn.com.tw/yearcard/two.html',
+          href: 'https://nmdap.udn.com.tw/yearcard/five.html',
           phone: phone1,
           btnColor: '#eb0029',
           btntxtColor: '#ffc700',
@@ -169,7 +168,7 @@ export default {
           name: 'slide6',
           pic: dog6,
           pic2: dog6Real,
-          href: 'https://nmdap.udn.com.tw/yearcard/three.html',
+          href: 'https://nmdap.udn.com.tw/yearcard/six.html',
           phone: phone2,
           btnColor: '#ffc700',
           btntxtColor: '#eb0029',
@@ -181,14 +180,27 @@ export default {
           number: '2017090106',
           ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/172002786863502/'
         }, {
-          name: 'slide7'
+          name: 'slide7',
+          pic: dog6,
+          pic2: dog6Real,
+          href: 'https://nmdap.udn.com.tw/yearcard/six.html',
+          phone: phone2,
+          btnColor: '#ffc700',
+          btntxtColor: '#eb0029',
+          fontColor: '#eb0029',
+          fontBackground: '#f5d949',
+          anim: './static/S1.png',
+          title: '啾咪黑美眉',
+          place: '板橋動物之家',
+          number: '2017090106',
+          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/172002786863502/'
         }, {
           name: 'slide8',
           href: './index.html'
         }
       ],
       bullets: [
-        bullet1, bullet2, bullet3, bullet4, bullet5, bullet6, bullet7, bullet8
+        bullet1, bullet2, bullet3, bullet4, bullet5, bullet6
       ]
     }
   },
@@ -212,7 +224,7 @@ export default {
     }
   },
   components: {
-    Foreground, Slides, Dogs, Headbar, Frame, Logo
+    Foreground, Slides, Dogs, Headbar, Frame, Logo, CanvasAnim
   },
   created: function () {
     if (this.getParameterByName('dog')) {
@@ -377,50 +389,6 @@ button.left{
 
 button.left:active, button.right:active, button.left:visited, button.right:visited{
   border-style: none;
-}
-
-ul.slider-nav{
-  /* position: fixed;
-  bottom: 64px;
-  left: 50%;
-  transform: translateX(-50%); */
-  border-bottom: solid 1px black;
-  display: flex;
-  justify-content: space-between;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  z-index: 999;
-  max-width: 100%;
-}
-
-ul.slider-nav.lasttwopages{
-  margin-top: 10%;
-}
-
-ul.slider-nav img{
-  width: 30px;
-  transform: translateY(4px);
-}
-
-@media screen and (min-width: 1024px){
-  ul.slider-nav{
-    width: 20%;
-    margin: 0 auto;
-  }
-}
-
-ul.slider-nav li{
-    float: left;
-    margin: 0 3px;
-}
-
-ul.slider-nav img{
-  opacity: 0.3;
-}
-
-ul.slider-nav img.active{
-  opacity: 1;
 }
 
 .rightanim {

@@ -6,7 +6,7 @@
 
 export default {
   name: 'CanvasAnim',
-  props: ['spritesheet', 'spriteWidth', 'spriteHeight', 'rows', 'cols', 'duration', 'play'],
+  props: ['spritesheet', 'spriteWidth', 'spriteHeight', 'rows', 'cols', 'duration'],
   data: function () {
     return {
       canvasSprite: {
@@ -31,11 +31,6 @@ export default {
     },
     frequency: function () {
       return Math.round(1000 / ((this.rows * this.cols) / this.duration))
-    }
-  },
-  watch: {
-    play: function (val) {
-
     }
   },
   mounted: function () {

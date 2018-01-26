@@ -73,6 +73,21 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       template: 'three.html',
       inject: true
     }),
+    new HtmlWebpackPlugin({
+      filename: 'four.html',
+      template: 'four.html',
+      inject: true
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'five.html',
+      template: 'five.html',
+      inject: true
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'six.html',
+      template: 'six.html',
+      inject: true
+    }),
     // copy custom static assets
     new CopyWebpackPlugin([
       {

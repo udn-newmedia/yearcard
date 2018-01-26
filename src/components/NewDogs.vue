@@ -1,6 +1,6 @@
 <template>
   <div class="dogs">
-    <div 
+    <div
       class="adog"
       v-for="(eachDog, index) in list" 
       :key="eachDog.name" 
@@ -9,7 +9,7 @@
         'z-index' : getZindex(index)
       }">
       <div class="wrapper" v-if="currentSlide < list.length-2">
-        <div class="imgWrapper hidden-mobile" v-if="currentSlide!=0">
+        <div class="imgWrapper hidden-mobile">
           <img 
             class="dog"
             :class="{'show': real}"
@@ -23,25 +23,13 @@
             }" 
             :src="eachDog.pic">          
         </div>
-        <div class="imgWrapper hidden-mobile" v-else>
-          <img
-            class="dog cover"
-            :src="eachDog.pic">                    
-        </div>        
         <div 
           class="words">
           <h1 
             class="title"
-            v-if="currentSlide!=0"
             :style="{
               'color' : textColor
             }">帶我們回家<br>陪你過年好嗎？</h1>
-          <h1 
-            class="title hidden-mobile"
-            v-else
-            :style="{
-              'color' : textColor
-            }">{{list[currentSlide].maintitle}}</h1>
           <div
             class="title wordbyword"
             v-for="(word, index) in eachDog.title"
@@ -56,9 +44,7 @@
             :style="{
               'color' : textColor
             }">
-            <p>{{list[currentSlide].text}}</p>
             <p class="underline">{{list[currentSlide].place}}</p>
-            <!-- <p class="number">{{list[currentSlide].number}}</p> -->
             <Share
               style="text-align: center;
                     margin-top: 30px;" 
@@ -80,23 +66,11 @@
             }" 
             :src="eachDog.pic">          
         </div>
-        <div class="imgWrapper hidden-pc" v-else>
-          <img
-            class="dog cover"
-            :src="eachDog.pic">                    
-        </div>
-        <h1 
-          class="title hidden-pc"
-          :style="{
-            'color' : textColor
-          }">{{list[currentSlide].maintitle}}</h1>
         <div class="text hidden-pc"
           :style="{
             'color' : textColor
           }">
-          <p>{{list[currentSlide].text}}</p>
           <p class="underline">{{list[currentSlide].place}}</p>
-          <!-- <p class="number">{{list[currentSlide].number}}</p> -->
         </div>
         <Share 
           class="hidden-pc" 
@@ -107,7 +81,7 @@
             <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
           </li>
         </ul>
-        <div class="phone" v-show="currentSlide!=0">
+        <div class="phone">
           <img :src="eachDog.phone" alt="">
           <button 
             class="interaction"
@@ -121,34 +95,6 @@
           </button>
           <CanvasAnim :spritesheet="eachDog.anim" spriteWidth="190" spriteHeight="20400" rows="120" cols="1" duration="4" :play="currentSlide==index"></CanvasAnim>
         </div>
-      </div>
-      <div class="wrapper secondlastpage" v-else-if="currentSlide === list.length-2">
-        <img class="cage" :src="cage">
-        <div class="lastwords">
-          <h1>我們也在等家</h1>
-          <p>零安樂死政策上路後，各地動物之家，依舊不是貓狗們真正的家，以領養代替購買，更多認養資訊資訊，請見<u>縣市立收容所網站</u>。</p>
-          <img class="lastdog" :src="lastdog">
-        </div>
-        <!-- <p><br></p>
-        <p><br></p> -->
-      </div>
-      <div class="wrapper" v-else>
-        <OfficialShare class="hidden-pc" :href="url"/>
-        <br>
-        <Editor>
-          <div>內容製作：連珮宇、蔡佩蓉</div>
-          <div>插畫：黃微庭</div>
-          <div>動畫：許藹雯</div>
-          <div>網頁設計：許瑋琳</div>
-          <div>攝影：林麒瑋</div>          
-          <div>網頁製作：方泰鈞、鄭偉廷</div>          
-          <div>監製：蔡幸怡、董谷音、潘如瑩</div>          
-          <div>2018.02</div>
-        </Editor>
-        <p class="hidden-mobile"><br></p>
-        <OfficialShare class="hidden-mobile" :href="url"/>
-        <br>
-        <button class="questionnaire">填寫閱讀體驗問卷</button>
       </div>
       <ul class="slider-nav hidden-pc" v-if="currentSlide>0 && currentSlide<list.length-2">
         <li v-for="n in bullets.length" :key="n.id">
@@ -170,7 +116,7 @@ import lastdog from '@/assets/page2_02.png'
 
 export default {
   name: 'Dogs',
-  props: ['currentSlide', 'list', 'bullets'],
+  props: ['currentSlide', 'list', 'bullets', 'cover'],
   data: function () {
     return {
       real: false,
@@ -495,6 +441,10 @@ ul.slider-nav{
   max-width: 100%;
 }
 
+ul.slider-nav.lasttwopages{
+  margin-top: 10%;
+}
+
 ul.slider-nav img{
   width: 30px;
   transform: translateY(4px);
@@ -503,9 +453,7 @@ ul.slider-nav img{
 @media screen and (min-width: 1024px){
   ul.slider-nav{
     width: 30%;
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
   }
 }
 

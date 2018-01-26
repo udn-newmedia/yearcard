@@ -25,7 +25,10 @@ module.exports = {
     app: './src/main.js',
     one: './src/one.js',
     two: './src/two.js',
-    three: './src/three.js'
+    three: './src/three.js',
+    four: './src/four.js',
+    five: './src/five.js',
+    six: './src/six.js'    
   },
   output: {
     path: config.build.assetsRoot,
