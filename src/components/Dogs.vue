@@ -177,7 +177,7 @@ export default {
       interval: 3000,
       cage: cage,
       lastdog: lastdog,
-      url: 'https://nmdap.udn.com.tw/yearcard/'
+      url: 'https://nmdap.udn.com.tw/yearcard/index.html'
     }
   },
   computed: {
