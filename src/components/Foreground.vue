@@ -267,6 +267,12 @@ export default {
   transform: rotate(90deg) translateX(100%);
 }
 
+@media screen and (max-height: 666px){
+  .decoration, .decoration.horizontal{
+    display: none;
+  }
+}
+
 .circle.bottom.cover img {
   width: 50px;
   transform: rotate(90deg) translateX(-100%)

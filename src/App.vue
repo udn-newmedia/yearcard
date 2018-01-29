@@ -255,13 +255,6 @@ export default {
       } else {
         return 0
       }
-    },
-    firstPageOpacity: function () {
-      if (this.currentSlide === 0) {
-        return 1
-      } else {
-        return 0
-      }
     }
   },
   components: {

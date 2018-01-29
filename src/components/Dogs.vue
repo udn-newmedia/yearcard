@@ -274,7 +274,7 @@ img.dog.cover {
   text-align: left;
 }
 
-.text p{
+.text p, .text a{
   margin: 0;
   font-size: 21px;
   line-height: 1.52;
@@ -286,7 +286,7 @@ img.dog.cover {
     padding-bottom: 5px;
   }
 
-  .text p {
+  .text p, .text a {
     font-size: 18px;
     line-height: 1.56;
   }
