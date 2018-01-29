@@ -23,11 +23,13 @@
             }" 
             :src="eachDog.pic">          
         </div>
-        <div class="imgWrapper hidden-mobile" v-else>
-          <img
-            class="dog cover"
-            :src="eachDog.pic">                    
-        </div>        
+        <div v-else>
+          <div class="imgWrapper hidden-mobile">
+            <img
+              class="dog cover"
+              :src="eachDog.pic">                    
+          </div>        
+        </div>
         <div 
           class="words">
           <h1 
@@ -129,24 +131,6 @@
           <img class="lastdog" :src="lastdog">
         </div>
       </div>
-      <!-- <div class="wrapper" v-else>
-        <OfficialShare v-show="index == 8" class="hidden-pc" :href="url"/>
-        <br>
-        <Editor>
-          <div>內容製作：連珮宇、蔡佩蓉</div>
-          <div>插畫：黃微庭</div>
-          <div>動畫：許藹雯</div>
-          <div>網頁設計：許瑋琳</div>
-          <div>攝影：林麒瑋</div>          
-          <div>網頁製作：方泰鈞、鄭偉廷</div>          
-          <div>監製：蔡幸怡、董谷音、潘如瑩</div>          
-          <div>2018.02</div>
-        </Editor>
-        <p class="hidden-mobile"><br></p>
-        <OfficialShare v-show="index == 8" class="hidden-mobile" :href="url"/>
-        <br>
-        <button class="questionnaire">填寫閱讀體驗問卷</button>
-      </div> -->
       <ul class="slider-nav hidden-pc" v-if="currentSlide>0 && currentSlide<list.length-2">
         <li v-for="n in bullets.length" :key="n.id">
           <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
@@ -283,7 +267,6 @@ img.dog.cover {
     transform: translateX(-45%) translateY(-50%);
   }
 }  
-
 
 .text{
   padding-top: 10px;

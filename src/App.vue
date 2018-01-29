@@ -255,6 +255,13 @@ export default {
       } else {
         return 0
       }
+    },
+    firstPageOpacity: function () {
+      if (this.currentSlide === 0) {
+        return 1
+      } else {
+        return 0
+      }
     }
   },
   components: {
@@ -342,6 +349,7 @@ export default {
 body {
   margin: 0;
   padding: 0;
+  overflow-y: hidden;
 }
 #app {
   font-family: "微軟正黑體", "Microsoft JhengHei", 'Avenir', Helvetica, Arial, sans-serif;
@@ -469,11 +477,15 @@ button.left:active, button.right:active, button.left:visited, button.right:visit
 
 .lastPage{
   position: absolute;
+  overflow-y: hidden;
 }
 
 @media screen and (min-width:1024px){
   .lastPage{
     width: 1200px;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
   }
 }
 
@@ -496,5 +508,4 @@ button.questionnaire{
     height: 100px;
   }
 }
-
 </style>
