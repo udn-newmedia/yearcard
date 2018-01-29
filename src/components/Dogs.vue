@@ -57,7 +57,7 @@
               'color' : textColor
             }">
             <p>{{list[currentSlide].text}}</p>
-            <p class="underline">{{list[currentSlide].place}}</p>
+            <a class="underline" :href="list[currentSlide].doglink" target="_blank">{{list[currentSlide].place}}</a>
             <!-- <p class="number">{{list[currentSlide].number}}</p> -->
             <Share
               style="text-align: center;
@@ -95,7 +95,7 @@
             'color' : textColor
           }">
           <p>{{list[currentSlide].text}}</p>
-          <p class="underline">{{list[currentSlide].place}}</p>
+          <a class="underline" :href="list[currentSlide].doglink" target="_blank">{{list[currentSlide].place}}</a>
           <!-- <p class="number">{{list[currentSlide].number}}</p> -->
         </div>
         <Share 
@@ -107,11 +107,10 @@
             <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
           </li>
         </ul>
-        <div class="phone" v-show="currentSlide!=0">
+        <div class="phone" v-show="currentSlide!=0" @click="gotoAR(eachDog.ARlink)">
           <img :src="eachDog.phone" alt="">
           <button 
             class="interaction"
-            @click="gotoAR(eachDog.ARlink)"
             :style="{
               'background-color': eachDog.btnColor,
               'color': eachDog.btntxtColor
@@ -126,14 +125,14 @@
         <img class="cage" :src="cage">
         <div class="lastwords">
           <h1>我們也在等家</h1>
-          <p>零安樂死政策上路後，各地動物之家，依舊不是貓狗們真正的家，以領養代替購買，更多認養資訊資訊，請見<u>縣市立收容所網站</u>。</p>
+          <p>零安樂死政策上路後，各地動物之家，依舊不是貓狗們真正的家，以領養代替購買，更多認養資訊資訊，請見<a class="underline" href="http://animal-adoption.coa.gov.tw/shelter" target="_blank">縣市立收容所網站</a>。</p>
           <img class="lastdog" :src="lastdog">
         </div>
         <!-- <p><br></p>
         <p><br></p> -->
       </div>
       <div class="wrapper" v-else>
-        <OfficialShare class="hidden-pc" :href="url"/>
+        <OfficialShare v-show="index == 8" class="hidden-pc" :href="url"/>
         <br>
         <Editor>
           <div>內容製作：連珮宇、蔡佩蓉</div>
@@ -146,7 +145,7 @@
           <div>2018.02</div>
         </Editor>
         <p class="hidden-mobile"><br></p>
-        <OfficialShare class="hidden-mobile" :href="url"/>
+        <OfficialShare v-show="index == 8" class="hidden-mobile" :href="url"/>
         <br>
         <button class="questionnaire">填寫閱讀體驗問卷</button>
       </div>
@@ -388,7 +387,7 @@ img.lastdog{
   }
 
   .wrapper.secondlastpage .lastwords{
-    width: 70%;
+    width: 60%;
   }
 
   .wrapper.secondlastpage img.lastdog{
@@ -430,6 +429,7 @@ img.lastdog{
   right: 0;
   bottom: 0;
   transform: translateX(25%);
+  cursor: pointer;
 }
 
 .phone button{
@@ -515,7 +515,7 @@ ul.slider-nav li{
 }
 
 ul.slider-nav img{
-  opacity: 0.5;
+  opacity: 0.2;
 }
 
 ul.slider-nav img.active{
@@ -523,6 +523,7 @@ ul.slider-nav img.active{
 }
 
 .underline{
+  color: black;
   text-decoration: underline;
 }
 
