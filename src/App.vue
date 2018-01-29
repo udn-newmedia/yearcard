@@ -20,6 +20,24 @@
           :list="list" 
           :currentSlide="currentSlide" 
           :bullets="bullets"/>
+        <div class="lastPage" :style="{'opacity': lastPageOpacity}">
+          <OfficialShare class="hidden-pc" :href="url"/>
+          <br>
+          <Editor>
+            <div>內容製作：連珮宇、蔡佩蓉</div>
+            <div>插畫：黃微庭</div>
+            <div>動畫：許藹雯</div>
+            <div>網頁設計：許瑋琳</div>
+            <div>攝影：林麒瑋</div>          
+            <div>網頁製作：方泰鈞、鄭偉廷</div>          
+            <div>監製：蔡幸怡、董谷音、潘如瑩</div>          
+            <div>2018.02</div>
+          </Editor>
+          <p class="hidden-mobile"><br></p>
+          <OfficialShare  class="hidden-mobile" :href="url"/>
+          <br>
+          <button class="questionnaire">填寫閱讀體驗問卷</button>
+        </div>        
         <Frame v-if="currentSlide==0"/>
       </div>
     </div>
@@ -35,6 +53,7 @@ import Slides from './components/Slides'
 import Headbar from './components/HeadBar'
 import Foreground from './components/Foreground'
 import CanvasAnim from './components/CanvasAnim'
+import Editor from './components/Editor'
 import OfficialShare from './components/OfficialShare'
 import Dogs from './components/Dogs'
 import Frame from './components/Frame'
@@ -229,10 +248,17 @@ export default {
       } else if (this.currentSlide % 2 === 0) {
         return bg2
       }
+    },
+    lastPageOpacity: function () {
+      if (this.currentSlide === this.list.length - 1) {
+        return 1
+      } else {
+        return 0
+      }
     }
   },
   components: {
-    Foreground, Slides, Dogs, Headbar, Frame, Logo, CanvasAnim, OfficialShare
+    Foreground, Slides, Dogs, Headbar, Frame, Logo, CanvasAnim, OfficialShare, Editor
   },
   created: function () {
     if (this.getParameterByName('dog')) {
@@ -439,6 +465,36 @@ button.left:active, button.right:active, button.left:visited, button.right:visit
   width: 100%;
   height: 64px;
   background: white;
+}
+
+.lastPage{
+  position: absolute;
+}
+
+@media screen and (min-width:1024px){
+  .lastPage{
+    width: 1200px;
+  }
+}
+
+button.questionnaire{
+  font-family: "Microsoft JhengHei";
+  width: 100%;
+  height: 70px;
+  border-radius: 35px;
+  font-size: 18px;
+  color: #636363;
+  background-color: #ffffff;
+  box-shadow: 0px 3px 7px 0 rgba(0, 0, 0, 0.1);
+  border: solid 2px #dcdcdc;
+  cursor: pointer;  
+}
+
+@media screen and (min-width: 1024px){
+  button.questionnaire{
+    width: 500px;
+    height: 100px;
+  }
 }
 
 </style>

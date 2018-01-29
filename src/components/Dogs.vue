@@ -128,10 +128,8 @@
           <p>零安樂死政策上路後，各地動物之家，依舊不是貓狗們真正的家，以領養代替購買，更多認養資訊資訊，請見<a class="underline" href="http://animal-adoption.coa.gov.tw/shelter" target="_blank">縣市立收容所網站</a>。</p>
           <img class="lastdog" :src="lastdog">
         </div>
-        <!-- <p><br></p>
-        <p><br></p> -->
       </div>
-      <div class="wrapper" v-else>
+      <!-- <div class="wrapper" v-else>
         <OfficialShare v-show="index == 8" class="hidden-pc" :href="url"/>
         <br>
         <Editor>
@@ -148,7 +146,7 @@
         <OfficialShare v-show="index == 8" class="hidden-mobile" :href="url"/>
         <br>
         <button class="questionnaire">填寫閱讀體驗問卷</button>
-      </div>
+      </div> -->
       <ul class="slider-nav hidden-pc" v-if="currentSlide>0 && currentSlide<list.length-2">
         <li v-for="n in bullets.length" :key="n.id">
           <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
