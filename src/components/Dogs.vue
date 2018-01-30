@@ -14,8 +14,7 @@
             class="dog"
             :class="{'show': real}"
             :src="eachDog.pic2"
-            style="position: absolute; top: 0;"
-            v-show="currentSlide!=0">
+            style="position: absolute; top: 0;">
           <img
             class="dog"
             :class="{
@@ -78,8 +77,7 @@
             class="dog"
             :class="{'show': real}"
             :src="eachDog.pic2"
-            style="position: absolute; top: 0;"
-            v-show="currentSlide!=0">
+            style="position: absolute; top: 0;">
           <img
             class="dog"
             :class="{
@@ -165,7 +163,7 @@ export default {
   data: function () {
     return {
       real: false,
-      interval: 3000,
+      period: 3000,
       cage: cage,
       lastdog: lastdog,
       url: 'https://nmdap.udn.com.tw/yearcard/index.html'
@@ -186,7 +184,7 @@ export default {
   mounted: function () {
     setInterval(() => {
       this.real = !this.real
-    }, this.interval)
+    }, this.period)
   },
   methods: {
     showDog: function (index) {
@@ -207,7 +205,6 @@ export default {
       window.open(link, '_blank')
     },
     hitBullet: function ($bulletIndex) {
-      // console.log($bulletIndex)
       this.$eventHub.$emit('change-bullet', $bulletIndex)
     }
   }
@@ -235,8 +232,9 @@ img.dog.show {
 }
 
 img.dog.cover {
-  width: 1062px;
-  transform: translateX(10%) translateY(10%);
+  /* width: 1062px; */
+  width: 115vh;
+  transform: translateX(10%) translateY(12%);
   opacity: 1;  
 }
 
@@ -507,7 +505,7 @@ ul.slider-nav{
 
 ul.slider-nav img{
   width: 35px;
-  transform: translateY(4px);
+  transform: translateY(5px);
 }
 
 @media screen and (min-width: 1024px){
@@ -522,6 +520,7 @@ ul.slider-nav img{
 ul.slider-nav li{
     float: left;
     margin: 0 3px;
+    cursor: pointer;
 }
 
 ul.slider-nav img{

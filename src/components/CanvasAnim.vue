@@ -6,7 +6,7 @@
 
 export default {
   name: 'CanvasAnim',
-  props: ['spritesheet', 'spriteWidth', 'spriteHeight', 'rows', 'cols', 'duration'],
+  props: ['spritesheet', 'spriteWidth', 'spriteHeight', 'rows', 'cols', 'duration', 'play'],
   data: function () {
     return {
       canvasSprite: {
@@ -44,7 +44,7 @@ export default {
     drawCanvas: function () {
       const sprite = this.canvasSprite
       const canvas = this.$refs.anime
-      if (canvas) {
+      if (canvas && this.play) {
         const ctx = canvas.getContext('2d')
         sprite.curFrame = ++sprite.curFrame % sprite.rows
         sprite.srcY = sprite.curFrame * this.srcHeight
@@ -60,7 +60,7 @@ export default {
 .anime{
   position: absolute;
   top: 30%;
-  transform: translateX(-10%) translateY(-50%);
+  transform: translateX(-20%) translateY(-50%);
   left: 0;
 }
 
