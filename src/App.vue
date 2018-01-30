@@ -6,6 +6,7 @@
       <Foreground :currentSlide="currentSlide" v-show="currentSlide < list.length-2"/>
       <div class="content">
         <Headbar buttonColor="black"/>      
+        <indicator color="#40220f" :progress="getProgress"/>
         <button class="left" v-if="currentSlide!=0" @click="clickPre">
           <i class="fa fa-angle-left fa-3" aria-hidden="true" style="font-size: 30px; transform: translateX(75%); color: white;"></i>
         </button>
@@ -36,7 +37,7 @@
           <p class="hidden-mobile"><br></p>
           <OfficialShare  class="hidden-mobile" :href="url"/>
           <br>
-          <button class="questionnaire">填寫閱讀體驗問卷</button>
+          <button @click="surveyLink" class="questionnaire">填寫閱讀體驗問卷</button>
         </div>        
         <Frame v-if="currentSlide==0"/>
       </div>
@@ -58,6 +59,7 @@ import OfficialShare from './components/OfficialShare'
 import Dogs from './components/Dogs'
 import Frame from './components/Frame'
 import Logo from './components/Logo'
+import Indicator from './components/Indicator'
 import dog1 from '@/assets/d-1.png'
 import dog1Real from '@/assets/d-2.png'
 import dog2 from '@/assets/d-3.png'
@@ -108,7 +110,10 @@ export default {
           name: 'slide0',
           pic: coverpic,
           maintitle: '把好運汪汪帶回家',
-          text: '在台灣，狗平均壽命8歲，但進到收容所，有的一待就是3、5年。聯合報尋訪動物之家，將一張張囚禁的笑臉，繪製成狗年賀卡。帶牠們回家、幫牠們找家，也給自己一個被愛的機會。'
+          text: '在台灣，狗平均壽命8歲，但進到收容所，有的一待就是3、5年。聯合報尋訪動物之家，將一張張囚禁的笑臉，繪製成狗年賀卡。帶牠們回家、幫牠們找家，也給自己一個被愛的機會。',
+          phone: phone1,
+          btnColor: '#eb0029',
+          btntxtColor: '#ffc700'
         },
         {
           name: 'slide1',
@@ -255,15 +260,19 @@ export default {
       } else {
         return 0
       }
+    },
+    getProgress: function () {
+      return (this.currentSlide + 1) / this.list.length * 100
     }
   },
   components: {
-    Foreground, Slides, Dogs, Headbar, Frame, Logo, CanvasAnim, OfficialShare, Editor
+    Foreground, Slides, Dogs, Headbar, Frame, Logo, CanvasAnim, OfficialShare, Editor, Indicator
   },
   created: function () {
     if (this.getParameterByName('dog')) {
       this.currentSlide = this.getParameterByName('dog')
     }
+    this.$eventHub.$on('change-bullet', this.changeSlide)
   },
   mounted: function () {
     let $app = this.$refs.app
@@ -287,6 +296,9 @@ export default {
         }, 750)
       }
     }.bind(this))
+  },
+  beforeDestroy: function () {
+    this.$eventHub.$off('change-bullet')
   },
   methods: {
     getParameterByName: function (name, url) {
@@ -320,6 +332,9 @@ export default {
         }
       }
     },
+    changeSlide: function (bulletIndex) {
+      this.currentSlide = bulletIndex
+    },
     showDog: function (index) {
       if (index === Number(this.currentSlide)) {
         return '1'
@@ -333,6 +348,9 @@ export default {
       } else {
         return '2'
       }
+    },
+    surveyLink: function () {
+      window.open('https://www.surveycake.com/s/KpQKN', '_blank')
     }
   }
 }
@@ -466,6 +484,7 @@ button.left:active, button.right:active, button.left:visited, button.right:visit
   width: 100%;
   height: 64px;
   background: white;
+  z-index: 999;
 }
 
 .lastPage{
@@ -473,7 +492,16 @@ button.left:active, button.right:active, button.left:visited, button.right:visit
   overflow-y: hidden;
 }
 
-@media screen and (min-width:1024px){
+@media screen and (min-width:1024px) and (max-width:1199px){
+  .lastPage{
+    width: 950px;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+}
+
+@media screen and (min-width:1200px){
   .lastPage{
     width: 1200px;
     left: 50%;
@@ -486,7 +514,7 @@ button.questionnaire{
   font-family: "Microsoft JhengHei";
   width: 100%;
   height: 70px;
-  border-radius: 35px;
+  border-radius: 50px;
   font-size: 18px;
   color: #636363;
   background-color: #ffffff;

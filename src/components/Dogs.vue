@@ -59,7 +59,12 @@
               'color' : textColor
             }">
             <p>{{list[currentSlide].text}}</p>
-            <a class="underline" :href="list[currentSlide].doglink" target="_blank">{{list[currentSlide].place}}</a>
+            <a class="underline"
+              :style="{
+                'color' : textColor
+              }"
+              :href="list[currentSlide].doglink" 
+              target="_blank">{{list[currentSlide].place}}</a>
             <!-- <p class="number">{{list[currentSlide].number}}</p> -->
             <Share
               style="text-align: center;
@@ -97,7 +102,12 @@
             'color' : textColor
           }">
           <p>{{list[currentSlide].text}}</p>
-          <a class="underline" :href="list[currentSlide].doglink" target="_blank">{{list[currentSlide].place}}</a>
+          <a class="underline"
+            :style="{
+              'color' : textColor
+            }" 
+            :href="list[currentSlide].doglink" 
+            target="_blank">{{list[currentSlide].place}}</a>
           <!-- <p class="number">{{list[currentSlide].number}}</p> -->
         </div>
         <Share 
@@ -106,7 +116,7 @@
           v-show="currentSlide!=0"/>
         <ul class="slider-nav hidden-mobile" v-if="currentSlide>0 && currentSlide<list.length-2">
           <li v-for="n in bullets.length" :key="n.id">
-            <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
+            <img :src="bullets[n-1]" :class="{'active': n === currentSlide}" @click="hitBullet(n)">
           </li>
         </ul>
         <div class="phone" v-show="currentSlide!=0" @click="gotoAR(eachDog.ARlink)">
@@ -127,13 +137,13 @@
         <img class="cage" :src="cage">
         <div class="lastwords">
           <h1>我們也在等家</h1>
-          <p>零安樂死政策上路後，各地動物之家，依舊不是貓狗們真正的家，以領養代替購買，更多認養資訊資訊，請見<a class="underline" href="http://animal-adoption.coa.gov.tw/shelter" target="_blank">縣市立收容所網站</a>。</p>
+          <p>零安樂死政策上路後，各地動物之家，依舊不是貓狗們真正的家，以領養代替購買，更多認養資訊資訊，請見<a class="underline" style="color: black;" href="http://animal-adoption.coa.gov.tw/shelter" target="_blank">縣市立收容所網站</a>。</p>
           <img class="lastdog" :src="lastdog">
         </div>
       </div>
       <ul class="slider-nav hidden-pc" v-if="currentSlide>0 && currentSlide<list.length-2">
         <li v-for="n in bullets.length" :key="n.id">
-          <img :src="bullets[n-1]" :class="{'active': n === currentSlide}">
+          <img :src="bullets[n-1]" :class="{'active': n === currentSlide}" @click="hitBullet(n)">
         </li>
       </ul>
     </div>
@@ -195,6 +205,10 @@ export default {
     },
     gotoAR: function (link) {
       window.open(link, '_blank')
+    },
+    hitBullet: function ($bulletIndex) {
+      // console.log($bulletIndex)
+      this.$eventHub.$emit('change-bullet', $bulletIndex)
     }
   }
 }
@@ -226,6 +240,12 @@ img.dog.cover {
   opacity: 1;  
 }
 
+@media screen and (min-width: 1024px) and (max-width: 1200px){
+  img.dog {
+    width: 400px;
+  }
+}
+
 @media screen and (max-width: 1023px){
   .dogs {
     width: 75%;
@@ -250,7 +270,15 @@ img.dog.cover {
   transition: all 1s;
 }
 
-@media screen and (min-width: 1024px){
+@media screen and (min-width: 1024px) and (max-width: 1199px){
+  .adog {
+    width: 1024px;
+    height: auto;
+    transform: translateX(-45%) translateY(-50%);
+  }  
+}
+
+@media screen and (min-width: 1200px){
   .adog {
     width: 1200px;
     height: auto;
@@ -307,6 +335,7 @@ img.dog.cover {
 
   .title{
     text-align: left;
+    margin-bottom: 0;
   }  
 }
 
@@ -386,8 +415,8 @@ img.lastdog{
   .words{
     position: absolute;
     top: 0;
-    width: 30%;
-  }
+    width: 35%;
+  }  
 
   .text {
     position: absolute;
@@ -477,7 +506,7 @@ ul.slider-nav{
 }
 
 ul.slider-nav img{
-  width: 30px;
+  width: 35px;
   transform: translateY(4px);
 }
 
@@ -504,7 +533,6 @@ ul.slider-nav img.active{
 }
 
 .underline{
-  color: black;
   text-decoration: underline;
 }
 

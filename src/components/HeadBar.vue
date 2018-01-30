@@ -37,7 +37,7 @@ export default {
   props: ['color', 'buttonColor', 'background'],
   data: function () {
     return {
-      top: 0,
+      top: 2,
       isOpen: false
     }
   },
