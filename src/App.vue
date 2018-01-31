@@ -22,9 +22,9 @@
           :currentSlide="currentSlide" 
           :bullets="bullets"/>
         <div class="lastPage" :style="{'opacity': lastPageOpacity}">
-          <OfficialShare class="hidden-pc" :href="url"/>
+          <OfficialShare class="hidden-pc mobpaddingLeft" :href="url"/>
           <br>
-          <Editor>
+          <Editor class="mobpaddingLeft">
             <div>內容製作：連珮宇、蔡佩蓉</div>
             <div>插畫：黃微庭</div>
             <div>動畫：許藹雯</div>
@@ -90,7 +90,7 @@ export default {
   name: 'app',
   data: function () {
     return {
-      url: 'https://nmdap.udn.com.tw/yearcard/index.html',
+      url: 'https://udn.com/upf/newmedia/2018_data/takemehome/index.html',
       panOnce: false,
       currentSlide: 0,
       phone1: phone1,
@@ -110,7 +110,8 @@ export default {
           name: 'slide0',
           pic: coverpic,
           maintitle: '把好運汪汪帶回家',
-          text: '在台灣，狗平均壽命8歲，但進到收容所，有的一待就是3、5年。聯合報尋訪動物之家，將一張張囚禁的笑臉，繪製成狗年賀卡。帶牠們回家、幫牠們找家，也給自己一個被愛的機會。',
+          subtitle: '分享給親朋好友，祝福好狗年，也一起為流浪狗找家找愛。',
+          text: '在台灣，狗平均壽命8歲，但收容所裡等不到家的狗，一待就是3、5年。聯合報尋訪動物之家，用這些笑臉製作新年AR賀卡，與狗狗們合照，鼓勵更多人「以認養代替購買」。',
           phone: phone1,
           btnColor: '#eb0029',
           btntxtColor: '#ffc700'
@@ -119,7 +120,7 @@ export default {
           name: 'slide1',
           pic: dog1,
           pic2: dog1Real,
-          href: 'https://nmdap.udn.com.tw/yearcard/one.html',
+          href: 'https://udn.com/upf/newmedia/2018_data/takemehome/one.html',
           phone: phone1,
           btnColor: '#eb0029',
           btntxtColor: '#ffc700',
@@ -135,7 +136,7 @@ export default {
           name: 'slide2',
           pic: dog2,
           pic2: dog2Real,
-          href: 'https://nmdap.udn.com.tw/yearcard/two.html',
+          href: 'https://udn.com/upf/newmedia/2018_data/takemehome/two.html',
           phone: phone2,
           btnColor: '#ffc700',
           btntxtColor: '#eb0029',
@@ -151,7 +152,7 @@ export default {
           name: 'slide3',
           pic: dog3,
           pic2: dog3Real,
-          href: 'https://nmdap.udn.com.tw/yearcard/three.html',
+          href: 'https://udn.com/upf/newmedia/2018_data/takemehome/three.html',
           phone: phone1,
           btnColor: '#eb0029',
           btntxtColor: '#ffc700',
@@ -167,7 +168,7 @@ export default {
           name: 'slide4',
           pic: dog4,
           pic2: dog4Real,
-          href: 'https://nmdap.udn.com.tw/yearcard/four.html',
+          href: 'https://udn.com/upf/newmedia/2018_data/takemehome/four.html',
           phone: phone2,
           btnColor: '#ffc700',
           btntxtColor: '#eb0029',
@@ -183,7 +184,7 @@ export default {
           name: 'slide5',
           pic: dog5,
           pic2: dog5Real,
-          href: 'https://nmdap.udn.com.tw/yearcard/five.html',
+          href: 'https://udn.com/upf/newmedia/2018_data/takemehome/five.html',
           phone: phone1,
           btnColor: '#eb0029',
           btntxtColor: '#ffc700',
@@ -199,7 +200,7 @@ export default {
           name: 'slide6',
           pic: dog6,
           pic2: dog6Real,
-          href: 'https://nmdap.udn.com.tw/yearcard/six.html',
+          href: 'https://udn.com/upf/newmedia/2018_data/takemehome/six.html',
           phone: phone2,
           btnColor: '#ffc700',
           btntxtColor: '#eb0029',
@@ -215,7 +216,7 @@ export default {
           name: 'slide7',
           pic: dog6,
           pic2: dog6Real,
-          href: 'https://nmdap.udn.com.tw/yearcard/six.html',
+          href: 'https://udn.com/upf/newmedia/2018_data/takemehome/six.html',
           phone: phone2,
           btnColor: '#ffc700',
           btntxtColor: '#eb0029',
@@ -369,17 +370,6 @@ body {
   text-align: center;
 }
 
-h1 {
-  font-size: 45px;
-}
-
-@media screen and (max-width: 1023px){
-  h1 {
-    font-size: 30px;
-    margin: 1px;
-  }
-}
-
 @media screen and (max-width: 1023px){
   .hidden-mobile{
     display: none!important;
@@ -389,6 +379,30 @@ h1 {
 @media screen and (min-width: 1024px){
   .hidden-pc{
     display: none!important;
+  }
+}
+
+h1 {
+  font-size: 45px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  h1 {
+    margin: 1px;
+  }
+}
+
+@media screen and (min-width: 375px) and (max-width: 767px){
+  h1 {
+    font-size: 30px;
+    margin: 1px;
+  }
+}
+
+@media screen and (max-width: 374px){
+  h1 {
+    font-size: 26px;
+    margin: 0;
   }
 }
 
@@ -490,6 +504,13 @@ button.left:active, button.right:active, button.left:visited, button.right:visit
 .lastPage{
   position: absolute;
   overflow-y: hidden;
+  width: 90%;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  .lastPage{
+    width: 80%;
+  }
 }
 
 @media screen and (min-width:1024px) and (max-width:1199px){
@@ -503,11 +524,17 @@ button.left:active, button.right:active, button.left:visited, button.right:visit
 
 @media screen and (min-width:1200px){
   .lastPage{
-    width: 1200px;
+    width: 1100px;
     left: 50%;
     top: 50%;
     transform: translateX(-50%) translateY(-50%);
   }
+}
+
+@media screen and (max-width: 1023px){
+  .lastPage .mobpaddingLeft{
+    padding-left: 30px;
+  }  
 }
 
 button.questionnaire{
@@ -520,7 +547,7 @@ button.questionnaire{
   background-color: #ffffff;
   box-shadow: 0px 3px 7px 0 rgba(0, 0, 0, 0.1);
   border: solid 2px #dcdcdc;
-  cursor: pointer;  
+  cursor: pointer;
 }
 
 @media screen and (min-width: 1024px){

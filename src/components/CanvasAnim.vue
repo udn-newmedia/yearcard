@@ -64,9 +64,16 @@ export default {
   left: 0;
 }
 
-@media screen and (max-width: 1023px){
+@media screen and (max-width: 767px){
   .anime{
     transform: translateX(-35%) translateY(-45%) scale(0.4);
   }
 }
+
+@media screen and (min-width:768px) and (max-width: 1023px){
+  .anime{
+    transform: translateX(-35%) translateY(-35%) scale(0.9);
+  }
+}
+
 </style>

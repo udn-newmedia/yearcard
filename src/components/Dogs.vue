@@ -10,17 +10,23 @@
       }">
       <div class="wrapper" v-if="currentSlide < list.length-2">
         <div class="imgWrapper hidden-mobile" v-if="currentSlide!=0">
-          <img 
-            class="dog"
-            :class="{'show': real}"
-            :src="eachDog.pic2"
-            style="position: absolute; top: 0;">
-          <img
-            class="dog"
-            :class="{
-              'show': !real
-            }" 
-            :src="eachDog.pic">          
+          <div class="innerwrapper" style="position: relative;">
+            <img 
+              class="dog"
+              :class="{'show': real}"
+              :src="eachDog.pic2"
+              style="position: absolute; top: 0;">
+            <img
+              class="dog"
+              :class="{
+                'show': !real
+              }" 
+              :src="eachDog.pic">
+            <img
+              v-show="currentSlide==4"
+              class="angel" 
+              :src="angel">
+          </div>          
         </div>
         <div v-else>
           <div class="imgWrapper hidden-mobile">
@@ -57,6 +63,7 @@
             :style="{
               'color' : textColor
             }">
+            <p class="subtitle">{{list[currentSlide].subtitle}}</p>
             <p>{{list[currentSlide].text}}</p>
             <a class="underline"
               :style="{
@@ -73,6 +80,7 @@
           </div>
         </div>
         <div class="imgWrapper hidden-pc" v-if="currentSlide!=0">
+          <div class="innerwrapper" style="position: relative;">
           <img 
             class="dog"
             :class="{'show': real}"
@@ -83,7 +91,12 @@
             :class="{
               'show': !real
             }" 
-            :src="eachDog.pic">          
+            :src="eachDog.pic">
+          <img
+            v-show="currentSlide==4"
+            class="angel" 
+            :src="angel">                    
+          </div>
         </div>
         <div class="imgWrapper hidden-pc" v-else>
           <img
@@ -99,6 +112,7 @@
           :style="{
             'color' : textColor
           }">
+          <p class="subtitle">{{list[currentSlide].subtitle}}</p>
           <p>{{list[currentSlide].text}}</p>
           <a class="underline"
             :style="{
@@ -126,7 +140,7 @@
               'color': eachDog.btntxtColor
             }">
             <i class="fa fa-arrow-up" aria-hidden="true"></i>
-            與我互動
+            與我合照
           </button>
           <CanvasAnim :spritesheet="eachDog.anim" spriteWidth="190" spriteHeight="20400" rows="120" cols="1" duration="4" :play="currentSlide==index"></CanvasAnim>
         </div>
@@ -135,7 +149,7 @@
         <img class="cage" :src="cage">
         <div class="lastwords">
           <h1>我們也在等家</h1>
-          <p>零安樂死政策上路後，各地動物之家，依舊不是貓狗們真正的家，以領養代替購買，更多認養資訊資訊，請見<a class="underline" style="color: black;" href="http://animal-adoption.coa.gov.tw/shelter" target="_blank">縣市立收容所網站</a>。</p>
+          <p>零安樂死政策上路後，各地動物之家，依舊不是貓狗們真正的家，以領養代替購買，更多認養資訊，請見<a class="underline" style="color: black;" href="http://animal-adoption.coa.gov.tw/shelter" target="_blank">各縣市收容所網站</a>。</p>
           <img class="lastdog" :src="lastdog">
         </div>
       </div>
@@ -156,6 +170,7 @@ import Editor from './Editor'
 import Logo from './Logo'
 import cage from '@/assets/page2_01.png'
 import lastdog from '@/assets/page2_02.png'
+import angel from '@/assets/angel.png'
 
 export default {
   name: 'Dogs',
@@ -166,7 +181,8 @@ export default {
       period: 3000,
       cage: cage,
       lastdog: lastdog,
-      url: 'https://nmdap.udn.com.tw/yearcard/index.html'
+      angel: angel,
+      url: 'https://udn.com/upf/newmedia/2018_data/takemehome/index.html'
     }
   },
   computed: {
@@ -259,6 +275,18 @@ img.dog.cover {
   }    
 }
 
+@media screen and (max-width: 767px){
+  img.dog{
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  img.dog{
+    width: 90%;
+  }
+}
+
 .adog {
   position: absolute;
   left: 0;
@@ -298,6 +326,7 @@ img.dog.cover {
   padding-top: 10px;
   padding-bottom: 10px;
   text-align: left;
+  letter-spacing: -0.5px;
 }
 
 .text p, .text a{
@@ -306,7 +335,19 @@ img.dog.cover {
   line-height: 1.52;
 }
 
-@media screen and (max-width: 1023px){
+p.subtitle{
+  margin-bottom: 7px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  .lastwords p{
+    margin: 0;
+    font-size: 21px;
+    line-height: 1.52;    
+  }
+}
+
+@media screen and (min-width: 375px) and (max-width: 767px){
   .text{
     padding-top: 5px;
     padding-bottom: 5px;
@@ -315,6 +356,17 @@ img.dog.cover {
   .text p, .text a {
     font-size: 18px;
     line-height: 1.56;
+  }
+}
+
+@media screen and (max-width: 374px){
+  .text{
+    padding: 0;
+  }
+
+  .text p, .text a {
+    font-size: 16px;
+    line-height: 1.4;
   }
 }
 
@@ -348,6 +400,15 @@ img.dog.cover {
   margin: 5px 5px 5px 0;
   font-weight: bold;
   font-size: 18px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  .title.wordbyword {
+    line-height:50px;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+  }  
 }
 
 .wrapper{
@@ -449,6 +510,12 @@ img.lastdog{
   margin-bottom: 8px;
 }
 
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  .phone img{
+    width: 118px;
+  }  
+}
+
 @media screen and (min-width: 1024px){
   .phone{
     transform: translateX(-50%);
@@ -470,6 +537,18 @@ button.interaction {
   height: 30px;
   border-radius: 15px;
   box-shadow: 0 0 4px 2px rgba(53, 53, 53, 0.14);
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  .phone img{
+    width: 118px;
+  }  
+  button.interaction {
+    width: 118px;
+    height: 40px;
+    border-radius: 30px;
+    font-size: 15px;
+  }
 }
 
 @media screen and (min-width: 1024px){
@@ -552,6 +631,27 @@ button.questionnaire{
   button.questionnaire{
     width: 500px;
     height: 100px;
+  }
+}
+
+.angel{
+  position: absolute;
+  left: 0%;
+  bottom: 0%;
+  width: 50%;
+  transform: translateX(-25%);
+  z-index: 4;
+}
+
+@media screen and (min-width:768px) and (max-width: 1023px){
+  .angel{
+    width: 45%;
+  }
+}
+
+@media screen and (min-width: 1024px){
+  .angel{
+    width: 42%;
   }
 }
 

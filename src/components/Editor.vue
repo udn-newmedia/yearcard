@@ -17,4 +17,5 @@ export default {
   color: #ffffff;
   border-bottom: none;
 }
+
 </style>
