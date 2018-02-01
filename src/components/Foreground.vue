@@ -1,46 +1,6 @@
 <template>
   <div class="bg">
-    <div v-if="currentSlide!=0">
-      <div class="circle circleLeftTop hidden-pc"
-        :style="{
-          'background-image' : 'url(' + selectCircle + ')'
-        }">
-      </div>
-      <div class="circle circleLeftBottom hidden-pc"
-        :style="{
-          'background-image' : 'url(' + selectCircle + ')'
-        }">
-      </div>
-      <div class="circle circleRightTop hidden-pc"
-        :style="{
-          'background-image' : 'url(' + selectCircle + ')'
-        }">
-      </div>
-      <div class="circle circleRightBottom hidden-pc"
-        :style="{
-          'background-image' : 'url(' + selectCircle + ')'
-        }">
-      </div>
-      <div class="circleWrapper right hidden-mobile"
-        :style="{
-          'background-image' : 'url(' + selectCircle + ')'
-        }">
-        <div class="circle"
-          :style="{
-            'background-image' : 'url(' + selectCircle + ')'
-          }"></div>
-      </div>
-      <div class="circleWrapper left hidden-mobile"
-        :style="{
-          'background-image' : 'url(' + selectCircle + ')'
-        }">
-        <div class="circle"
-          :style="{
-            'background-image' : 'url(' + selectCircle + ')'
-          }"></div>
-      </div>
-    </div>
-    <div v-else>
+    <div v-if="currentSlide==0">
       <div class="circle circleLeftTop cover hidden-pc"
         :style="{
           'background-image' : 'url(' + selectCircle + ')'
@@ -89,6 +49,46 @@
         }">
       </div>      
     </div>    
+    <div v-else>
+      <div class="circle circleLeftTop hidden-pc"
+        :style="{
+          'background-image' : 'url(' + selectCircle + ')'
+        }">
+      </div>
+      <div class="circle circleLeftBottom hidden-pc"
+        :style="{
+          'background-image' : 'url(' + selectCircle + ')'
+        }">
+      </div>
+      <div class="circle circleRightTop hidden-pc"
+        :style="{
+          'background-image' : 'url(' + selectCircle + ')'
+        }">
+      </div>
+      <div class="circle circleRightBottom hidden-pc"
+        :style="{
+          'background-image' : 'url(' + selectCircle + ')'
+        }">
+      </div>
+      <div class="circleWrapper right hidden-mobile"
+        :style="{
+          'background-image' : 'url(' + selectCircle + ')'
+        }">
+        <div class="circle"
+          :style="{
+            'background-image' : 'url(' + selectCircle + ')'
+          }"></div>
+      </div>
+      <div class="circleWrapper left hidden-mobile"
+        :style="{
+          'background-image' : 'url(' + selectCircle + ')'
+        }">
+        <div class="circle"
+          :style="{
+            'background-image' : 'url(' + selectCircle + ')'
+          }"></div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -111,9 +111,9 @@ export default {
   computed: {
     selectCircle: function () {
       if (Number(this.currentSlide) % 2 === 0) {
-        return circle1
+        return this.circle1
       } else if (Number(this.currentSlide) % 2 === 1) {
-        return circle2
+        return this.circle2
       }
     }
   }

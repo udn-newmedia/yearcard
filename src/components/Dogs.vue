@@ -42,7 +42,7 @@
             v-if="currentSlide!=0"
             :style="{
               'color' : textColor
-            }">帶我們回家<br>陪你過年好嗎？</h1>
+            }">{{eachDog.slogan}}<br>陪你過年好嗎？</h1>
           <h1 
             class="title hidden-mobile"
             v-else
@@ -355,7 +355,7 @@ p.subtitle{
 
   .text p, .text a {
     font-size: 18px;
-    line-height: 1.56;
+    line-height: 1.52;
   }
 }
 

@@ -51,7 +51,6 @@
 <script>
 import * as Hammer from 'Hammerjs'
 import Utils from 'udn-newmedia-utils'
-
 import Slides from './components/Slides'
 import Headbar from './components/HeadBar'
 import Foreground from './components/Foreground'
@@ -129,6 +128,7 @@ export default {
           fontColor: '#f5d949',
           fontBackground: '#eb0029',
           anim: './static/S7.png',
+          slogan: '帶我回家',
           title: '風火輪小乖',
           place: '板橋動物之家',
           number: '2015072109',
@@ -145,6 +145,7 @@ export default {
           fontColor: '#eb0029',
           fontBackground: '#f5d949',
           anim: './static/S8.png',
+          slogan: '帶我回家',
           title: '大耳朵桃桃',
           place: '板橋動物之家',
           number: '2015082705',
@@ -161,6 +162,7 @@ export default {
           fontColor: '#f5d949',
           fontBackground: '#eb0029',
           anim: './static/S3.png',
+          slogan: '帶我回家',
           title: '等家最久黑嚕嚕',
           place: '中和動物之家',
           number: '2012080701',
@@ -177,6 +179,7 @@ export default {
           fontColor: '#eb0029',
           fontBackground: '#f5d949',
           anim: './static/S5.png',
+          slogan: '帶我回家',
           title: '風火輪白白',
           place: '板橋動物之家',
           number: '2015100801',
@@ -193,6 +196,7 @@ export default {
           fontColor: '#f5d949',
           fontBackground: '#eb0029',
           anim: './static/S6.png',
+          slogan: '帶我們回家',
           title: '皮皺皺五小福',
           place: '板橋動物之家',
           number: '2017061909-13',
@@ -209,6 +213,7 @@ export default {
           fontColor: '#eb0029',
           fontBackground: '#f5d949',
           anim: './static/S1.png',
+          slogan: '帶我回家',
           title: '啾咪黑美眉',
           place: '板橋動物之家',
           number: '2017090106',
@@ -225,6 +230,7 @@ export default {
           fontColor: '#eb0029',
           fontBackground: '#f5d949',
           anim: './static/S1.png',
+          slogan: '帶我回家',
           title: '啾咪黑美眉',
           place: '板橋動物之家',
           number: '2017090106',
