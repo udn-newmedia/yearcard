@@ -16,7 +16,7 @@ export default {
     }
   },
   mounted: function () {
-    window.addEventListener('scroll', this.handelScroll)
+    // window.addEventListener('scroll', this.handelScroll)
   },
   methods: {
     handelScroll: function () {

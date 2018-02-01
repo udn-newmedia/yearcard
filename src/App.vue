@@ -50,6 +50,8 @@
 
 <script>
 import * as Hammer from 'Hammerjs'
+import Utils from 'udn-newmedia-utils'
+
 import Slides from './components/Slides'
 import Headbar from './components/HeadBar'
 import Foreground from './components/Foreground'
@@ -234,7 +236,8 @@ export default {
       ],
       bullets: [
         bullet1, bullet2, bullet3, bullet4, bullet5, bullet6
-      ]
+      ],
+      device: Utils.detectPlatform()
     }
   },
   computed: {
@@ -277,26 +280,27 @@ export default {
   },
   mounted: function () {
     let $app = this.$refs.app
-    let hammer = new Hammer($app)
-    hammer.on('panleft', function (ev) {
-      if (!this.panOnce) {
-        this.clickNext()
-        this.panOnce = true
-        setTimeout(() => {
-          this.panOnce = false
-        }, 750)
-      }
-    }.bind(this))
-
-    hammer.on('panright', function (ev) {
-      if (!this.panOnce) {
-        this.clickPre()
-        this.panOnce = true
-        setTimeout(() => {
-          this.panOnce = false
-        }, 750)
-      }
-    }.bind(this))
+    if (this.device === 'Mob') {
+      let hammer = new Hammer($app)
+      hammer.on('panleft', function (ev) {
+        if (!this.panOnce) {
+          this.clickNext()
+          this.panOnce = true
+          setTimeout(() => {
+            this.panOnce = false
+          }, 750)
+        }
+      }.bind(this))
+      hammer.on('panright', function (ev) {
+        if (!this.panOnce) {
+          this.clickPre()
+          this.panOnce = true
+          setTimeout(() => {
+            this.panOnce = false
+          }, 750)
+        }
+      }.bind(this))
+    }
   },
   beforeDestroy: function () {
     this.$eventHub.$off('change-bullet')
