@@ -70,7 +70,8 @@
                 'color' : textColor
               }"
               :href="list[currentSlide].doglink" 
-              target="_blank">{{list[currentSlide].place}}</a>
+              target="_blank"
+              @click="sendga(list[currentSlide].doglink)">{{list[currentSlide].place}}</a>
             <!-- <p class="number">{{list[currentSlide].number}}</p> -->
             <Share
               style="text-align: center;
@@ -119,7 +120,8 @@
               'color' : textColor
             }" 
             :href="list[currentSlide].doglink" 
-            target="_blank">{{list[currentSlide].place}}</a>
+            target="_blank"
+            @click="sendga(list[currentSlide].doglink)">{{list[currentSlide].place}}</a>
           <!-- <p class="number">{{list[currentSlide].number}}</p> -->
         </div>
         <Share 
@@ -149,7 +151,7 @@
         <img class="cage" :src="cage">
         <div class="lastwords">
           <h1>我們也在等家</h1>
-          <p>零安樂死政策上路後，各地動物之家，依舊不是貓狗們真正的家，以領養代替購買，更多認養資訊，請見<a class="underline" style="color: black;" href="http://animal-adoption.coa.gov.tw/shelter" target="_blank">各縣市收容所網站</a>。</p>
+          <p>零安樂死政策上路後，各地動物之家，依舊不是貓狗們真正的家，以領養代替購買，更多認養資訊，請見<a class="underline" style="color: black;" @click="sendga('http://animal-adoption.coa.gov.tw/shelter')" href="http://animal-adoption.coa.gov.tw/shelter" target="_blank">各縣市收容所網站</a>。</p>
           <img class="lastdog" :src="lastdog">
         </div>
       </div>
@@ -163,6 +165,7 @@
 </template>
 
 <script>
+import Utils from 'udn-newmedia-utils'
 import Share from './Share'
 import OfficialShare from './OfficialShare'
 import CanvasAnim from './CanvasAnim'
@@ -219,9 +222,23 @@ export default {
     },
     gotoAR: function (link) {
       window.open(link, '_blank')
+      window.ga('send', {
+        'hitType': 'event',
+        'eventCategory': '超連結點擊',
+        'eventAction': 'click',
+        'eventLabel': '[' + Utils.detectPlatform() + '] [' + document.querySelector('title').innerHTML + '] [' + link + ']'
+      })
     },
     hitBullet: function ($bulletIndex) {
       this.$eventHub.$emit('change-bullet', $bulletIndex)
+    },
+    sendga: function (link) {
+      window.ga('send', {
+        'hitType': 'event',
+        'eventCategory': '超連結點擊',
+        'eventAction': 'click',
+        'eventLabel': '[' + Utils.detectPlatform() + '] [' + document.querySelector('title').innerHTML + '] [' + link + ']'
+      })
     }
   }
 }
@@ -265,17 +282,19 @@ img.dog.cover {
     width: 75%;
   }
 
-  img.dog{
-    width: 100%;
-  }
-
   img.dog.cover {
     width: 125%;
     transform: none;
   }    
 }
 
-@media screen and (max-width: 767px){
+@media screen and (max-width: 374px){
+  img.dog{
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 375px) and (max-width: 767px){
   img.dog{
     width: 100%;
   }
@@ -508,6 +527,13 @@ img.lastdog{
 .phone img{
   width: 54px;
   margin-bottom: 8px;
+}
+
+@media screen and (max-width: 374px){
+  .phone img{
+    width: 40px;
+    margin-bottom: 5px;
+  }  
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px){

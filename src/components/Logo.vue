@@ -1,17 +1,29 @@
 <template>
     <div class="logo-block">
         <div class="logo nmd">
-            <a href="https://udn.com/upf/newmedia/udn_newmedia/" target="_blank"><img src="https://udn.com/upf/newmedia/image/nmd_logo_2018.png"></a>
+            <a href="https://udn.com/upf/newmedia/udn_newmedia/" @click="sendga('https://udn.com/upf/newmedia/udn_newmedia/')" target="_blank"><img src="https://udn.com/upf/newmedia/image/nmd_logo_2018.png"></a>
         </div>
         <div class="logo">
-            <a href="https://udn.com/news/index" target="_blank"><img src="https://udn.com/upf/newmedia/image/udn-logo.svg"></a>
+            <a href="https://udn.com/news/index" @click="sendga('https://udn.com/news/index')" target="_blank"><img src="https://udn.com/upf/newmedia/image/udn-logo.svg"></a>
         </div>
     </div>
 </template>
 
 <script>
+import Utils from 'udn-newmedia-utils'
 export default {
-  name: 'logo'
+  name: 'logo',
+  methods: {
+    sendga: function (link) {
+      console.log(link)
+      window.ga('send', {
+        'hitType': 'event',
+        'eventCategory': '超連結點擊',
+        'eventAction': 'click',
+        'eventLabel': '[' + Utils.detectPlatform() + '] [' + document.querySelector('title').innerHTML + '] [' + link + ']'
+      })
+    }
+  }
 }
 </script>
 

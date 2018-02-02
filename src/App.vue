@@ -36,7 +36,7 @@
           </Editor>
           <p class="hidden-mobile"><br></p>
           <OfficialShare  class="hidden-mobile" :href="url"/>
-          <br>
+          <br class="hidden-toosmallmobile">
           <button @click="surveyLink" class="questionnaire">填寫閱讀體驗問卷</button>
         </div>        
         <Frame v-if="currentSlide==0"/>
@@ -279,13 +279,14 @@ export default {
     Foreground, Slides, Dogs, Headbar, Frame, Logo, CanvasAnim, OfficialShare, Editor, Indicator
   },
   created: function () {
+    this.$eventHub.$on('change-bullet', this.changeSlide)
     if (this.getParameterByName('dog')) {
       this.currentSlide = this.getParameterByName('dog')
     }
-    this.$eventHub.$on('change-bullet', this.changeSlide)
   },
   mounted: function () {
     let $app = this.$refs.app
+    this.$eventHub.$emit('change-bullet', Number(this.currentSlide))
     if (this.device === 'Mob') {
       let hammer = new Hammer($app)
       hammer.on('panleft', function (ev) {
@@ -325,6 +326,7 @@ export default {
       if (this.currentSlide > 0) {
         if (!this.panOnce) {
           this.currentSlide--
+          this.$eventHub.$emit('change-bullet', this.currentSlide)
           this.panOnce = true
           setTimeout(() => {
             this.panOnce = false
@@ -336,6 +338,7 @@ export default {
       if (this.currentSlide < this.list.length - 1) {
         if (!this.panOnce) {
           this.currentSlide++
+          this.$eventHub.$emit('change-bullet', this.currentSlide)
           this.panOnce = true
           setTimeout(() => {
             this.panOnce = false
@@ -345,6 +348,14 @@ export default {
     },
     changeSlide: function (bulletIndex) {
       this.currentSlide = bulletIndex
+      // send GA
+      // console.log('[' + Utils.detectPlatform() + '] [' + document.querySelector('title').innerHTML + '] [page read - page' + this.currentSlide + ']')
+      window.ga('send', {
+        'hitType': 'event',
+        'eventCategory': 'read',
+        'eventAction': 'click',
+        'eventLabel': '[' + Utils.detectPlatform() + '] [' + document.querySelector('title').innerHTML + '] [page read - page' + this.currentSlide + ']'
+      })
     },
     showDog: function (index) {
       if (index === Number(this.currentSlide)) {
@@ -361,7 +372,14 @@ export default {
       }
     },
     surveyLink: function () {
-      window.open('https://www.surveycake.com/s/KpQKN', '_blank')
+      const url = 'https://www.surveycake.com/s/KpQKN'
+      window.open(url, '_blank')
+      window.ga('send', {
+        'hitType': 'event',
+        'eventCategory': '超連結點擊',
+        'eventAction': 'click',
+        'eventLabel': '[' + Utils.detectPlatform() + '] [' + document.querySelector('title').innerHTML + '] [' + url + ']'
+      })
     }
   }
 }
@@ -392,6 +410,11 @@ body {
   }
 }
 
+@media screen and (max-width: 374px){
+  .hidden-toosmallmobile{
+    display: none!important;
+  }
+}
 h1 {
   font-size: 45px;
 }
@@ -500,7 +523,7 @@ button.left:active, button.right:active, button.left:visited, button.right:visit
 }
 
 .logoblock{
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -509,6 +532,12 @@ button.left:active, button.right:active, button.left:visited, button.right:visit
   height: 64px;
   background: white;
   z-index: 999;
+}
+
+@media screen and (max-width: 374px){
+  .logoblock{
+    height: 50px;
+  }
 }
 
 .lastPage{
@@ -558,6 +587,12 @@ button.questionnaire{
   box-shadow: 0px 3px 7px 0 rgba(0, 0, 0, 0.1);
   border: solid 2px #dcdcdc;
   cursor: pointer;
+}
+
+@media screen and (max-width: 374px){
+  button.questionnaire{
+    transform: scale(0.8)
+  }
 }
 
 @media screen and (min-width: 1024px){

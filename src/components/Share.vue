@@ -32,6 +32,12 @@ export default {
       } else {
         window.open('https://lineit.line.me/share/ui?url=' + this.href)
       }
+      window.ga('send', {
+        'hitType': 'event',
+        'eventCategory': 'Line Share',
+        'eventAction': 'click',
+        'eventLabel': '[' + Utils.detectPlatform() + '] [' + document.querySelector('title').innerHTML + '] [line share]'
+      })
     },
     fbShare: function () {
       // console.log(this.href)
@@ -41,6 +47,12 @@ export default {
         link: this.href,
         caption: '聯合報'
       }, function (response) {
+      })
+      window.ga('send', {
+        'hitType': 'event',
+        'eventCategory': 'FB Share',
+        'eventAction': 'click',
+        'eventLabel': '[' + Utils.detectPlatform() + '] [' + document.querySelector('title').innerHTML + '] [FB share] [' + this.href + ']'
       })
     }
   }

@@ -17,7 +17,7 @@
             </div>
         </div>
         <div id="icon">
-            <a href="."><img src="https://udn.com/upf/newmedia/image/udn_logo_circle_black.png"></a>
+            <a href="." @click="sendga"><img src="https://udn.com/upf/newmedia/image/udn_logo_circle_black.png"></a>
         </div>
         <!-- <div id="hbutton" class="squre hidden-pc">
           <div id="nav-icon" :class="{open: isOpen}" @click="handleClick">
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-// import Utils from 'udn-newmedia-utils'
+import Utils from 'udn-newmedia-utils'
 export default {
   name: 'indicator',
   props: ['color', 'buttonColor', 'background'],
@@ -65,6 +65,14 @@ export default {
           this.top = 6
         }
       }
+    },
+    sendga: function () {
+      window.ga('send', {
+        'hitType': 'event',
+        'eventCategory': '超連結點擊',
+        'eventAction': 'click',
+        'eventLabel': '[' + Utils.detectPlatform() + '] [' + document.querySelector('title').innerHTML + '] [' + location.href + ']'
+      })
     }
   }
 }
