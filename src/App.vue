@@ -132,7 +132,8 @@ export default {
           title: '風火輪小乖',
           place: '板橋動物之家',
           number: '2015072109',
-          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/141368526550584/',
+          // ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/141368526550584/',
+          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/152338968895718/',
           doglink: 'http://www.ahiqo.ntpc.gov.tw/adopt.php?id=51071&flag=0'
         }, {
           name: 'slide2',
@@ -149,7 +150,8 @@ export default {
           title: '大耳朵桃桃',
           place: '板橋動物之家',
           number: '2015082705',
-          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/2006044492982527/',
+          // ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/2006044492982527/',
+          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/175857536365423/',
           doglink: 'http://www.ahiqo.ntpc.gov.tw/adopt.php?id=48317&flag=0'
         }, {
           name: 'slide3',
@@ -166,7 +168,8 @@ export default {
           title: '等家最久黑嚕嚕',
           place: '中和動物之家',
           number: '2012080701',
-          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/1438851946237312/',
+          // ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/1438851946237312/',
+          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/792834450912097/',
           doglink: 'http://www.ahiqo.ntpc.gov.tw/adopt.php?id=43957&flag=0'
         }, {
           name: 'slide4',
@@ -183,7 +186,8 @@ export default {
           title: '風火輪白白',
           place: '板橋動物之家',
           number: '2015100801',
-          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/586046791745349/',
+          // ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/586046791745349/',
+          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/581633202177201/',
           doglink: 'http://www.ahiqo.ntpc.gov.tw/adopt.php?id=53365&flag=0'
         }, {
           name: 'slide5',
@@ -200,7 +204,8 @@ export default {
           title: '皮皺皺五小福',
           place: '板橋動物之家',
           number: '2017061909-13',
-          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/1002034936601268/',
+          // ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/1002034936601268/',
+          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/870275499821478/',
           doglink: 'http://www.ahiqo.ntpc.gov.tw/adopt.php?id=67825&flag=0'
         }, {
           name: 'slide6',
@@ -217,7 +222,8 @@ export default {
           title: '啾咪黑美眉',
           place: '板橋動物之家',
           number: '2017090106',
-          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/172002786863502/',
+          // ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/172002786863502/',
+          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/536367860071119/',
           doglink: 'http://www.ahiqo.ntpc.gov.tw/adopt.php?id=69011&flag=0'
         }, {
           name: 'slide7',
@@ -234,6 +240,7 @@ export default {
           title: '啾咪黑美眉',
           place: '板橋動物之家',
           number: '2017090106',
+          // ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/172002786863502/'
           ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/172002786863502/'
         }, {
           name: 'slide8',
