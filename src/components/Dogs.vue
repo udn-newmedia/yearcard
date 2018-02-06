@@ -141,6 +141,7 @@
         <Share 
           class="hidden-pc" 
           :href="eachDog.href"
+          :name="eachDog.title"
           v-show="currentSlide!=0"/>
         <ul class="slider-nav hidden-mobile" v-if="currentSlide>0 && currentSlide<list.length-2">
           <li v-for="n in bullets.length" :key="n.id">

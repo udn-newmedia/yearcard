@@ -17,11 +17,12 @@ import fbbtn from '@/assets/share_btn.png'
 
 export default {
   name: 'share',
-  props: ['href'],
+  props: ['href', 'name'],
   data: function () {
     return {
       words: '',
-      fbbtn: fbbtn
+      fbbtn: fbbtn,
+      description: '在台灣，狗平均壽命8歲，但收容所裡等不到家的狗，一待就是3、5年。聯合報尋訪動物之家，將一張張送不出去的笑臉，繪製成狗年賀卡。帶牠們回家、幫牠們找家，也給自己一個被愛的機會。'
     }
   },
   methods: {
@@ -43,9 +44,9 @@ export default {
       // console.log(this.href)
       FB.ui({
         method: 'feed',
-        name: '賀年卡賀年卡',
+        name: this.name,
         link: this.href,
-        caption: '聯合報'
+        caption: this.description
       }, function (response) {
       })
       window.ga('send', {
