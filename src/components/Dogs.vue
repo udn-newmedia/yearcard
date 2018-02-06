@@ -27,7 +27,7 @@
               class="angel" 
               :src="angel">
             <div class="dialogue" v-show="currentSlide==6 && showdialogue">
-              <div class="closebutton"  @click="clickclose">
+              <div class="closebutton" @click="clickclose">
                 <i class="fa fa-close"></i>
               </div>
               <p>在收容所住了三年<br>白白來不及等到一個家<br>在專題上線前幾日當了天使<br>我們還是留下她最後的笑臉<br>希望我們都在新的一年<br>「愛得及時」</p>
@@ -728,7 +728,8 @@ button.questionnaire{
   height: 41px;
   border-radius: 50%;
   background-image: linear-gradient(to top, #5c3000, #40220f 83%);
-  cursor: pointer;  
+  cursor: pointer;
+  z-index: 99;  
 }
 
 .fa.fa-close{
