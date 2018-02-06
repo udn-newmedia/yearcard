@@ -78,9 +78,9 @@ import phone2 from '@/assets/phone3.png'
 import bullet1 from '@/assets/a-1.png'
 import bullet2 from '@/assets/a-2.png'
 import bullet3 from '@/assets/a-3.png'
-import bullet4 from '@/assets/a-4.png'
+import bullet4 from '@/assets/a-6.png'
 import bullet5 from '@/assets/a-5.png'
-import bullet6 from '@/assets/a-6.png'
+import bullet6 from '@/assets/a-4.png'
 import bullet7 from '@/assets/a-7.png'
 import bullet8 from '@/assets/a-8.png'
 import bg1 from '@/assets/bg1.jpg'
@@ -173,22 +173,22 @@ export default {
           doglink: 'http://www.ahiqo.ntpc.gov.tw/adopt.php?id=43957&flag=0'
         }, {
           name: 'slide4',
-          pic: dog4,
-          pic2: dog4Real,
-          href: 'https://udn.com/upf/newmedia/2018_data/takemehome/four.html',
+          pic: dog6,
+          pic2: dog6Real,
+          href: 'https://udn.com/upf/newmedia/2018_data/takemehome/six.html',
           phone: phone2,
           btnColor: '#ffc700',
           btntxtColor: '#eb0029',
           fontColor: '#eb0029',
           fontBackground: '#f5d949',
-          anim: './static/S5.png',
+          anim: './static/S1.png',
           slogan: '帶我回家',
-          title: '風火輪白白',
+          title: '啾咪黑美眉',
           place: '板橋動物之家',
-          number: '2015100801',
-          // ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/586046791745349/',
-          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/581633202177201/',
-          doglink: 'http://www.ahiqo.ntpc.gov.tw/adopt.php?id=53365&flag=0'
+          number: '2017090106',
+          // ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/172002786863502/',
+          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/536367860071119/',
+          doglink: 'http://www.ahiqo.ntpc.gov.tw/adopt.php?id=69011&flag=0'
         }, {
           name: 'slide5',
           pic: dog5,
@@ -209,22 +209,22 @@ export default {
           doglink: 'http://www.ahiqo.ntpc.gov.tw/adopt.php?id=67825&flag=0'
         }, {
           name: 'slide6',
-          pic: dog6,
-          pic2: dog6Real,
-          href: 'https://udn.com/upf/newmedia/2018_data/takemehome/six.html',
+          pic: dog4,
+          pic2: dog4Real,
+          href: 'https://udn.com/upf/newmedia/2018_data/takemehome/four.html',
           phone: phone2,
           btnColor: '#ffc700',
           btntxtColor: '#eb0029',
           fontColor: '#eb0029',
           fontBackground: '#f5d949',
-          anim: './static/S1.png',
+          anim: './static/S5.png',
           slogan: '帶我回家',
-          title: '啾咪黑美眉',
+          title: '風火輪白白',
           place: '板橋動物之家',
-          number: '2017090106',
-          // ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/172002786863502/',
-          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/536367860071119/',
-          doglink: 'http://www.ahiqo.ntpc.gov.tw/adopt.php?id=69011&flag=0'
+          number: '2015100801',
+          // ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/586046791745349/',
+          ARlink: 'https://www.facebook.com/fbcameraeffects/tryit/581633202177201/',
+          doglink: 'http://www.ahiqo.ntpc.gov.tw/adopt.php?id=53365&flag=0'
         }, {
           name: 'slide7',
           pic: dog6,

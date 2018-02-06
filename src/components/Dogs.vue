@@ -23,9 +23,15 @@
               }" 
               :src="eachDog.pic">
             <img
-              v-show="currentSlide==4"
+              v-show="currentSlide==6"
               class="angel" 
               :src="angel">
+            <div class="dialogue" v-show="currentSlide==6 && showdialogue">
+              <div class="closebutton"  @click="clickclose">
+                <i class="fa fa-close"></i>
+              </div>
+              <p>在收容所住了三年<br>白白來不及等到一個家<br>在專題上線前幾日當了天使<br>我們還是留下她最後的笑臉<br>希望我們都在新的一年<br>「愛得及時」</p>
+            </div>
           </div>          
         </div>
         <div v-else>
@@ -80,6 +86,7 @@
               v-show="currentSlide!=0"/>
           </div>
         </div>
+        <div style="position: relative">
         <div class="imgWrapper hidden-pc" v-if="currentSlide!=0">
           <div class="innerwrapper" style="position: relative;">
           <img 
@@ -94,7 +101,7 @@
             }" 
             :src="eachDog.pic">
           <img
-            v-show="currentSlide==4"
+            v-show="currentSlide==6"
             class="angel" 
             :src="angel">                    
           </div>
@@ -123,6 +130,13 @@
             target="_blank"
             @click="sendga(list[currentSlide].doglink)">{{list[currentSlide].place}}</a>
           <!-- <p class="number">{{list[currentSlide].number}}</p> -->
+        </div>
+        <div class="dialogue hidden-pc" v-show="currentSlide==6 && showdialogue">
+          <div class="closebutton" @click="clickclose">
+            <i class="fa fa-close"></i>
+          </div>          
+          <p>在收容所住了三年<br>白白來不及等到一個家<br>在專題上線前幾日當了天使<br>我們還是留下她最後的笑臉<br>希望我們都在新的一年<br>「愛得及時」</p>            
+        </div>
         </div>
         <Share 
           class="hidden-pc" 
@@ -185,7 +199,9 @@ export default {
       cage: cage,
       lastdog: lastdog,
       angel: angel,
-      url: 'https://udn.com/upf/newmedia/2018_data/takemehome/index.html'
+      url: 'https://udn.com/upf/newmedia/2018_data/takemehome/index.html',
+      showdialogue: true
+      // infoaboutdeath: '在收容所住了三年白白來不及等到一個家\n在專題上線前幾日當了天使\n我們還是留下她最後的笑臉\n希望我們都在新的一年\n「愛得及時」'
     }
   },
   computed: {
@@ -231,6 +247,9 @@ export default {
     },
     hitBullet: function ($bulletIndex) {
       this.$eventHub.$emit('change-bullet', $bulletIndex)
+    },
+    clickclose: function () {
+      this.showdialogue = false
     },
     sendga: function (link) {
       window.ga('send', {
@@ -669,6 +688,23 @@ button.questionnaire{
   z-index: 4;
 }
 
+.dialogue{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 100%; 
+  height: 100%; 
+  opacity: 0.97;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 0 5px 1px rgba(53, 53, 53, 0.25);
+  z-index: 5;
+}
+
 @media screen and (min-width:768px) and (max-width: 1023px){
   .angel{
     width: 45%;
@@ -681,4 +717,46 @@ button.questionnaire{
   }
 }
 
+.closebutton{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 10px;
+  top: 10px;
+  width: 41px;
+  height: 41px;
+  border-radius: 50%;
+  background-image: linear-gradient(to top, #5c3000, #40220f 83%);
+  cursor: pointer;  
+}
+
+.fa.fa-close{
+  color:white;
+  font-size: 25px;
+}
+
+.dialogue p{
+  color: #323232;     
+}  
+
+@media screen and (min-width: 375px) and (max-width: 767px){
+  .dialogue p{
+    font-size: 18px;
+    line-height: 1.78;
+    letter-spacing: normal;
+    text-align: center;
+    color: #323232;     
+  }  
+}
+
+@media screen and (min-width: 768px){
+  .dialogue p{
+    font-size: 21px;
+    line-height: 1.62;
+    letter-spacing: normal;
+    text-align: center;
+    color: #323232;     
+  }  
+}
 </style>
