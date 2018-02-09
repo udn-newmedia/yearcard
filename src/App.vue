@@ -32,13 +32,13 @@
             <div>攝影：林麒瑋</div>          
             <div>網頁製作：方泰鈞、鄭偉廷</div>
             <div>社群行銷：舒懷緯、黃馨慧</div>
-            <div>監製：蔡幸怡、董谷音、潘如瑩</div>          
-            <div>2018.02</div>
+            <div>監製：蔡幸怡、董谷音、潘如瑩、熊迺群</div>          
+            <div>2018.02.09</div>
           </Editor>
           <p class="hidden-mobile"><br></p>
           <OfficialShare  class="hidden-mobile" :href="url"/>
           <br class="hidden-toosmallmobile">
-          <button @click="surveyLink" class="questionnaire">填寫閱讀體驗問卷</button>
+          <button @click="surveyLink" class="questionnaire" v-show="currentSlide === list.length - 1">填寫閱讀體驗問卷</button>
         </div>        
         <Frame v-if="currentSlide==0"/>
       </div>
